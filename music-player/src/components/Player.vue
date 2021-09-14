@@ -15,6 +15,13 @@
           <button id="Next" @click="next()">Next</button>
         </div>
       </section>
+      <section class="playlist">
+          <h3>My Playlist</h3>
+          <button v-for="song in songs" :key="song.src" @click="play(song)" :class="(song.src == current.src) ? 'song playing' : 'song'">
+              {{ song.title }} - {{ song.artist }}
+          </button>
+
+      </section>
     </main>
   </div>
 </template>
@@ -33,7 +40,7 @@ export default {
         {
           title: "Regulate",
           artist: "Warren G",
-          src: require('../assets/WarrenG-Regulate-ft.NateDogg.mp3')
+          src: require("../assets/WarrenG-Regulate-ft.NateDogg.mp3"),
         },
         {
           title: "Ramen and Oj",
@@ -48,38 +55,38 @@ export default {
   methods: {
     play(song) {
       if (typeof song != "undefined") {
-          this.current = song;
-          this.player.src = this.current.src;
+        this.current = song;
+        this.player.src = this.current.src;
       }
-      
+
       this.player.play();
       this.playingNow = true;
     },
 
     pause() {
-        this.player.pause();
-        this.playingNow = false;
+      this.player.pause();
+      this.playingNow = false;
     },
 
     next() {
-        this.index++;
-        if(this.index > this.songs.lenght - 1) {
-            this.index = 0;
-        }
+      this.index++;
+      if (this.index > this.songs.lenght - 1) {
+        this.index = 0;
+      }
 
-        this.current = this.songs[this.index];
-        this.play(this.current);
+      this.current = this.songs[this.index];
+      this.play(this.current);
     },
-    
+
     previous() {
-        this.index--;
-        if(this.index > 0) {
-            this.index = this.songs.lenght - 1;
-        }
+      this.index--;
+      if (this.index < 0) {
+        this.index = this.songs.lenght - 1;
+      }
 
-        this.current = this.songs[this.index];
-        this.play(this.current);
-    },
+      this.current = this.songs[this.index];
+      this.play(this.current);
+    }
   },
   created() {
     this.current = this.songs[this.index];
