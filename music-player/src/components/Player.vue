@@ -10,8 +10,8 @@
         </h2>
         <div class="buttons">
           <button id="Previous">Prev</button>
-          <button id="Play" v-if="!playingNow">Play</button>
-          <button id="Paus" v-else>Paus</button>
+          <button id="Play" v-if="!playingNow" @click="play()">Play</button>
+          <button id="Paus" v-else @click="pause()">Paus</button>
           <button id="Next">Next</button>
         </div>
       </section>
@@ -26,16 +26,19 @@ export default {
   name: "player-comtainer",
   data() {
     return {
-      current: {
-        title: "Another brick in the wall",
-      },
-      index: 1,
+      current: {},
+      index: 0,
       playingNow: false,
       songs: [
         {
-          title: "Another brick in the wall",
-          artist: "Pink Floyd",
-          // src: require('')
+          title: "Regulate",
+          artist: "Warren G",
+          src: require('../assets/WarrenG-Regulate-ft.NateDogg.mp3')
+        },
+        {
+          title: "Ramen and Oj",
+          artist: "Joyner Lucas",
+          src: require("../assets/JoynerLucas&LilBaby-Ramen&OJ.mp3"),
         },
         {
           title: "Hotel Californa",
@@ -48,19 +51,30 @@ export default {
           // src: require('')
         },
       ],
+      // Handle the audio inside of app
       player: new Audio(),
-    }
+    };
   },
   methods: {
-      play(song) {
-          if(typeof song != "undefined")
+    play(song) {
+      if (typeof song != "undefined") {
           this.current = song;
+          this.player.src = this.current.src;
       }
+      
+      this.player.play();
+      this.playingNow = true;
+    },
+
+    pause() {
+        this.player.pause();
+        this.playingNow = false;
+    }
   },
   created() {
     this.current = this.songs[this.index];
-    // this.player.src = this.current.src;
-    // this.player.play()
+    this.player.src = this.current.src;
+    //this.player.play()
   },
 };
 </script>
