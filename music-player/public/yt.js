@@ -1,3 +1,5 @@
+let player;
+
 // gets called automatically when YouTube player loads
 function onYouTubeIframeAPIReady() {
     // using global variable
@@ -15,4 +17,4 @@ function onYouTubeIframeAPIReady() {
   function onPlayerStateChange(event) {
     if (event.data != YT.PlayerState.PLAYING) return
   }
-  
+ 

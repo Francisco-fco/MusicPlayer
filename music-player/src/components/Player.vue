@@ -1,11 +1,10 @@
 <template>
-  <div>
-    <button @click="play('eFEjDCMNqYs')">Ramen&Oj</button>
-    <button @click="play('HQ1nvhLf1EU')">YahMoBethere</button>
-
-    <button @click="pause()">Pause</button>
-    <button @click="next()">Next</button>
-    <button @click="previous()">Previous</button>
+  <div class="buttons">
+    <button id="play" @click="play('eFEjDCMNqYs')">1</button>
+    <button @click="play('HQ1nvhLf1EU')">2</button>
+    <button id="pause" @click="pause()">Pause</button>
+    <button id="next" @click="next()">Next</button>
+    <button id="previous" @click="previous()">Previous</button>
   </div>
 
   <!--
@@ -43,30 +42,12 @@
 
 <script>
 export default {
-  methods: {
-    play(id) {
-      // calling global variable
-      window.player.loadVideoById(id);
-      window.player.playVideo();
-    },
-    pause() {
-      window.player.pauseVideo();
-    },
+  // Hårdkodat exempel
 
-    next() {
-      window.player.nextVideo();
-    },
-
-    previous() {
-      window.player.previousVideo();
-    },
-  },
-};
-
-/*
+  name: "player-comtainer",
   data() {
     return {
-        
+      /*
         
       current: {},
       index: 0,
@@ -86,8 +67,27 @@ export default {
       // Handle the audio inside of app
       player: new Audio(),
       */
+    };
+  },
+  methods: {
+    play(id) {
+      // calling global variable
+      window.player.loadVideoById(id);
+      window.player.playVideo();
+    },
+    pause() {
+      window.player.pauseVideo();
+    },
 
-/*
+    next() {
+      window.player.nextVideo();
+    },
+
+    previous() {
+      window.player.previousVideo();
+    },
+
+    /*
     play(song) {
       if (typeof song.src != "undefined") {
         this.current = song;
@@ -140,6 +140,8 @@ export default {
     //this.player.play()
   },
   */
+  },
+};
 </script>
 
 <style>
@@ -160,5 +162,17 @@ header {
   padding: 2vw;
   background-color: brown;
   color: whitesmoke;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    padding: 1vw;
+
+}
+
+.buttons > button {
+    margin-right: 1vw;
+    padding: 0.5vw;
 }
 </style>
