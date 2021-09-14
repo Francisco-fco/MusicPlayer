@@ -1,7 +1,7 @@
 <template>
   <div>
-    <button @click="play('eFEjDCMNqYs')">Play</button>
-    <button @click="play('HQ1nvhLf1EU')">Play</button>
+    <button @click="play('eFEjDCMNqYs')">Ramen&Oj</button>
+    <button @click="play('HQ1nvhLf1EU')">YahMoBethere</button>
 
     <button @click="pause()">Pause</button>
     <button @click="next()">Next</button>
