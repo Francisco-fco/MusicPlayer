@@ -40,11 +40,6 @@ export default {
           artist: "Joyner Lucas",
           src: require("../assets/JoynerLucas&LilBaby-Ramen&OJ.mp3"),
         },
-        {
-          title: "Hotel Californa",
-          artist: "Gipsy Kings",
-          // src: require('')
-        },
       ],
       // Handle the audio inside of app
       player: new Audio(),
