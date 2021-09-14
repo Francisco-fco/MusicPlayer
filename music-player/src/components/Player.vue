@@ -5,7 +5,7 @@
       </header>
       <main>
           <section class="player">
-              <h2 id="song-title">Giannis</h2>
+              <h2 id="song-title">{{ current.title }}</h2>
           </section>
       </main>
   </div>
@@ -13,7 +13,28 @@
 
 <script>
 export default {
-    name: 'player-comtainer'
+// Hårdkodat exempel
+
+    name: 'player-comtainer',
+    data () {
+        return {
+           current: {
+               title: 'Another brick in the wall'
+           },
+           songs: [
+               {
+                   title: 'Another brick in the wall',
+                   artist: 'Pink Floyd',
+                   // src: require('')
+               },
+               {
+                   title: 'Hotel Californa',
+                   artist: 'Gipsy Kings',
+                   // src: require('')
+               }
+           ] 
+        }
+    }
 }
 </script>
 
@@ -35,6 +56,7 @@ header {
     align-items: center;
     padding: 2vw;
     background-color: brown;
+    color: whitesmoke;
 }
 
 </style>
