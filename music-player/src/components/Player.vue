@@ -1,11 +1,13 @@
 <template>
   <div>
-    <button @click="play('DXxeOvvNNwc')">The Black Page #1 on piano</button>
-    <button @click="play('CtkZxnkbjtI')">The Black Page #2 live band</button>
+    <button @click="play('eFEjDCMNqYs')">Play</button>
+    <button @click="play('HQ1nvhLf1EU')">Play</button>
+
     <button @click="pause()">Pause</button>
+    <button @click="next()">Next</button>
+    <button @click="previous()">Previous</button>
   </div>
-  
-  
+
   <!--
   <div class="player-container">
     <header>
@@ -41,12 +43,30 @@
 
 <script>
 export default {
-  // Hårdkodat exempel
+  methods: {
+    play(id) {
+      // calling global variable
+      window.player.loadVideoById(id);
+      window.player.playVideo();
+    },
+    pause() {
+      window.player.pauseVideo();
+    },
 
-  name: "player-comtainer",
+    next() {
+      window.player.nextVideo();
+    },
+
+    previous() {
+      window.player.previousVideo();
+    },
+  },
+};
+
+/*
   data() {
     return {
-        /*
+        
         
       current: {},
       index: 0,
@@ -66,18 +86,7 @@ export default {
       // Handle the audio inside of app
       player: new Audio(),
       */
-    };
-  },
-  methods: {
 
-      play(id){
-      // calling global variable
-      window.player.loadVideoById(id)
-      window.player.playVideo()
-    },
-    pause(){
-      window.player.pauseVideo()
-    },
 /*
     play(song) {
       if (typeof song.src != "undefined") {
@@ -131,8 +140,6 @@ export default {
     //this.player.play()
   },
   */
-  }
-};
 </script>
 
 <style>
