@@ -1,4 +1,12 @@
 <template>
+  <div>
+    <button @click="play('DXxeOvvNNwc')">The Black Page #1 on piano</button>
+    <button @click="play('CtkZxnkbjtI')">The Black Page #2 live band</button>
+    <button @click="pause()">Pause</button>
+  </div>
+  
+  
+  <!--
   <div class="player-container">
     <header>
       <h1>Music</h1>
@@ -9,21 +17,26 @@
           {{ current.title }} - <span>{{ current.artist }}</span>
         </h2>
         <div class="buttons">
-          <button id="Previous" @click="previous()">Prev</button>
-          <button id="Play" v-if="!playingNow" @click="play()">Play</button>
-          <button id="Paus" v-else @click="pause()">Paus</button>
-          <button id="Next" @click="next()">Next</button>
+          <button id="Previous" @click="previous">Prev</button>
+          <button id="Play" v-if="!playingNow" @click="play">Play</button>
+          <button id="Paus" v-else @click="pause">Paus</button>
+          <button id="Next" @click="next">Next</button>
         </div>
       </section>
       <section class="playlist">
-          <h3>My Playlist</h3>
-          <button v-for="song in songs" :key="song.src" @click="play(song)" :class="(song.src == current.src) ? 'song playing' : 'song'">
-              {{ song.title }} - {{ song.artist }}
-          </button>
-
+        <h3>My Playlist</h3>
+        <button
+          v-for="song in songs"
+          :key="song.src"
+          @click="play(song)"
+          :class="song.src == current.src ? 'song playing' : 'song'"
+        >
+          {{ song.title }} - {{ song.artist }}
+        </button>
       </section>
     </main>
   </div>
+  -->
 </template>
 
 <script>
@@ -33,6 +46,8 @@ export default {
   name: "player-comtainer",
   data() {
     return {
+        /*
+        
       current: {},
       index: 0,
       playingNow: false,
@@ -50,17 +65,39 @@ export default {
       ],
       // Handle the audio inside of app
       player: new Audio(),
+      */
     };
   },
   methods: {
+
+      play(id){
+      // calling global variable
+      window.player.loadVideoById(id)
+      window.player.playVideo()
+    },
+    pause(){
+      window.player.pauseVideo()
+    },
+/*
     play(song) {
-      if (typeof song != "undefined") {
+      if (typeof song.src != "undefined") {
         this.current = song;
         this.player.src = this.current.src;
       }
 
       this.player.play();
-      this.playingNow = true;
+      this.player.addEventListener(
+        "ended",
+        function () {
+          this.index++;
+          if (this.index > this.songs.length - 1) {
+            this.index = 0;
+          }
+          this.current = this.songs[this.index];
+          this.play(this.current);
+        }.bind(this)
+      );
+      this.isPlaying = true;
     },
 
     pause() {
@@ -86,13 +123,15 @@ export default {
 
       this.current = this.songs[this.index];
       this.play(this.current);
-    }
+    },
   },
   created() {
     this.current = this.songs[this.index];
     this.player.src = this.current.src;
     //this.player.play()
   },
+  */
+  }
 };
 </script>
 
