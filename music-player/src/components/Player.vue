@@ -9,10 +9,10 @@
           {{ current.title }} - <span>{{ current.artist }}</span>
         </h2>
         <div class="buttons">
-          <button id="Previous">Prev</button>
+          <button id="Previous" @click="previous()">Prev</button>
           <button id="Play" v-if="!playingNow" @click="play()">Play</button>
           <button id="Paus" v-else @click="pause()">Paus</button>
-          <button id="Next">Next</button>
+          <button id="Next" @click="next()">Next</button>
         </div>
       </section>
     </main>
@@ -45,11 +45,6 @@ export default {
           artist: "Gipsy Kings",
           // src: require('')
         },
-        {
-          title: "Regulate",
-          artist: "Warren G",
-          // src: require('')
-        },
       ],
       // Handle the audio inside of app
       player: new Audio(),
@@ -69,7 +64,27 @@ export default {
     pause() {
         this.player.pause();
         this.playingNow = false;
-    }
+    },
+
+    next() {
+        this.index++;
+        if(this.index > this.songs.lenght - 1) {
+            this.index = 0;
+        }
+
+        this.current = this.songs[this.index];
+        this.play(this.current);
+    },
+    
+    previous() {
+        this.index--;
+        if(this.index > 0) {
+            this.index = this.songs.lenght - 1;
+        }
+
+        this.current = this.songs[this.index];
+        this.play(this.current);
+    },
   },
   created() {
     this.current = this.songs[this.index];
