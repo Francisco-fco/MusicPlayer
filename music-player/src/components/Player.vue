@@ -15,19 +15,12 @@ export default {
       current: {},
       index: 0,
       playingNow: false,
-      songs: [
-        {
-          title: "Yah Mo Be There",
-          artist: "James Ingram",
-          src: "HQ1nvhLf1EU",
-        },
-        {
-          title: "Ramen and Oj",
-          artist: "Joyner Lucas",
-          src: "eFEjDCMNqYs",
-        },
-      ],
-    };
+      songs: [],
+    }
+  },
+  mounted() {
+      fetch('https://yt-music-api.herokuapp.com/api/yt/artists/metallica')
+        .then(res => res.json())
   },
 
   /* computed: {
