@@ -17,7 +17,7 @@ export default {
       playingNow: false,
       songs: [
         {
-          title: "Yah mo be there",
+          title: "Yah Mo Be There",
           artist: "James Ingram",
           src: "HQ1nvhLf1EU",
         },
@@ -30,6 +30,13 @@ export default {
     };
   },
 
+  /* computed: {
+    storeSongs() {
+        this.$store.commit("setSong");
+        return this.$store.state.songs;
+    },
+},*/
+
   methods: {
     play(id) {
       // calling global variable
@@ -41,14 +48,14 @@ export default {
     },
 
     next() {
-      let videoId = 'eFEjDCMNqYs';
+      let videoId = "eFEjDCMNqYs";
       window.player.loadVideoById(videoId);
       window.player.nextVideo();
     },
 
     previous() {
-        let previousId = 'HQ1nvhLf1EU';
-        window.player.loadVideoById(previousId)
+      let previousId = "HQ1nvhLf1EU";
+      window.player.loadVideoById(previousId);
       window.player.previousVideo();
     },
   },
