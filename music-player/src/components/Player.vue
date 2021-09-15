@@ -1,7 +1,7 @@
 <template>
   <div class="buttons">
-    <button id="play" @click="play('eFEjDCMNqYs')">1</button>
-    <button @click="play('HQ1nvhLf1EU')">2</button>
+    <button id="play" @click="play('HQ1nvhLf1EU')">1</button>
+    <button @click="play('eFEjDCMNqYs')">2</button>
     <button id="pause" @click="pause()">Pause</button>
     <button id="next" @click="next()">Next</button>
     <button id="previous" @click="previous()">Previous</button>
@@ -10,30 +10,26 @@
 
 <script>
 export default {
-    data() {
+  data() {
     return {
-    
-        
       current: {},
       index: 0,
       playingNow: false,
       songs: [
         {
-          title: "Regulate",
-          artist: "Warren G",
-          src: "eFEjDCMNqYs",
+          title: "Yah mo be there",
+          artist: "James Ingram",
+          src: "HQ1nvhLf1EU",
         },
         {
           title: "Ramen and Oj",
           artist: "Joyner Lucas",
-          src: 'HQ1nvhLf1EU',
+          src: "eFEjDCMNqYs",
         },
       ],
-      
-     
     };
   },
- 
+
   methods: {
     play(id) {
       // calling global variable
@@ -45,10 +41,14 @@ export default {
     },
 
     next() {
+      let videoId = 'eFEjDCMNqYs';
+      window.player.loadVideoById(videoId);
       window.player.nextVideo();
     },
 
     previous() {
+        let previousId = 'HQ1nvhLf1EU';
+        window.player.loadVideoById(previousId)
       window.player.previousVideo();
     },
   },
@@ -76,14 +76,13 @@ header {
 }
 
 .buttons {
-    display: flex;
-    justify-content: center;
-    padding: 1vw;
-
+  display: flex;
+  justify-content: center;
+  padding: 1vw;
 }
 
 .buttons > button {
-    margin-right: 1vw;
-    padding: 0.5vw;
+  margin-right: 1vw;
+  padding: 0.5vw;
 }
 </style>
