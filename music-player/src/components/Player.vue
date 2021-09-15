@@ -43,11 +43,11 @@
 <script>
 export default {
   // Hårdkodat exempel
-
+/*
   name: "player-comtainer",
   data() {
     return {
-      /*
+    
         
       current: {},
       index: 0,
@@ -66,9 +66,10 @@ export default {
       ],
       // Handle the audio inside of app
       player: new Audio(),
-      */
+     
     };
   },
+   */
   methods: {
     play(id) {
       // calling global variable
