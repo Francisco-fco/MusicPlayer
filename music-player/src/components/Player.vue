@@ -82,6 +82,12 @@ export default {
   box-sizing: border-box;
 }
 
+input {
+  width: 40%;
+  padding: 0.5vw;
+  margin: 1vw;
+}
+
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
