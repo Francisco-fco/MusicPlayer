@@ -5,6 +5,7 @@
       <h3>ARTIST NAME</h3>
       <h3>IMAGE</h3>
     </div>
+    <SearchBar />
     <div class="buttons">
       <button id="play" @click="play('HQ1nvhLf1EU')">1</button>
       <button @click="play('eFEjDCMNqYs')">2</button>
@@ -16,15 +17,13 @@
 </template>
 
 <script>
+import SearchBar from "./SearchBar.vue";
 export default {
   props: ["song"],
 
-  /* computed: {
-    storeSongs() {
-        this.$store.commit("setSong");
-        return this.$store.state.songs;
-    },
-},*/
+  components: {
+    SearchBar,
+  },
 
   methods: {
     play(id) {
