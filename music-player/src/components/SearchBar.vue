@@ -20,7 +20,9 @@ export default {
 
   methods: {
     search() {
-      this.$store.commit("updateSearchText", searchText);
+
+        // PÅBÖRJA HÄR searchText undefined vid implementering inom parenteser.
+      this.$store.commit("updateSearchText");
       this.$store.dispatch("fetchSearchedText");
     },
   },
