@@ -1,4 +1,11 @@
 <template>
+<div class="player-container">
+  <input
+    type="text"
+    id="search"
+    placeholder="Search for songs/albums or artist!"
+    @input="updateSearchText"
+  />
   <div class="buttons">
     <button id="play" @click="play('HQ1nvhLf1EU')">1</button>
     <button @click="play('eFEjDCMNqYs')">2</button>
@@ -6,6 +13,7 @@
     <button id="next" @click="next()">Next</button>
     <button id="previous" @click="previous()">Previous</button>
   </div>
+</div>
 </template>
 
 <script>
@@ -17,10 +25,6 @@ export default {
       playingNow: false,
       songs: [],
     }
-  },
-  mounted() {
-      fetch('https://yt-music-api.herokuapp.com/api/yt/artists/metallica')
-        .then(res => res.json())
   },
 
   /* computed: {
@@ -51,6 +55,10 @@ export default {
       window.player.loadVideoById(previousId);
       window.player.previousVideo();
     },
+    
+    updateSearchText(e) {
+      this.$store.commit("updateSearchText", e.target.value);
+    },
   },
 };
 </script>
@@ -79,6 +87,9 @@ header {
   display: flex;
   justify-content: center;
   padding: 1vw;
+  background-color: chocolate;
+  margin-left: 30%;
+  margin-right: 30%;
 }
 
 .buttons > button {
