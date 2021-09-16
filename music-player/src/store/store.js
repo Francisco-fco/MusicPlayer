@@ -9,6 +9,7 @@ export default createStore({
   mutations: {
     setSearchResult(state, payload) {
       state.searchResult = payload;
+
     },
     updateSearchText(state, payload) {
       state.searchText = payload;
@@ -16,14 +17,12 @@ export default createStore({
     },
   },
 
-  getters: {},
 
   actions: {
     async fetchSearchedText() {
       await axios
         .get(
-          "https://yt-music-api.herokuapp.com/api/yt/search/" +
-            this.state.searchText)
+          "https://yt-music-api.herokuapp.com/api/yt/search/" + this.state.searchText)
         .then(response => {
           this.commit("setSearchResult", response.data);
           console.log("action response data:" + response.data);

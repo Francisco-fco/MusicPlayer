@@ -7,6 +7,7 @@
       v-on:keyup.enter="search(searchText)"
       v-model="searchText"
     />
+    <span>{{ searchText }}</span>
   </div>
 </template>
 
@@ -20,8 +21,6 @@ export default {
 
   methods: {
     search() {
-
-        // PÅBÖRJA HÄR searchText undefined vid implementering inom parenteser.
       this.$store.commit("updateSearchText", this.searchText);
       this.$store.dispatch("fetchSearchedText");
     },
