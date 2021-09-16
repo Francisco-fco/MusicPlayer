@@ -1,31 +1,36 @@
 <template>
-<div class="player-container">
-  <input
-    type="text"
-    id="search"
-    placeholder="Search for songs/albums or artist!"
-    @input="updateSearchText"
-  />
-  <div class="buttons">
-    <button id="play" @click="play('HQ1nvhLf1EU')">1</button>
-    <button @click="play('eFEjDCMNqYs')">2</button>
-    <button id="pause" @click="pause()">Pause</button>
-    <button id="next" @click="next()">Next</button>
-    <button id="previous" @click="previous()">Previous</button>
+  <div class="player-container">
+    <div class="song-container">
+      <h3>SONG NAME</h3>
+      <h3>ARTIST NAME</h3>
+      <h3>IMAGE</h3>
+    </div>
+    <input
+      type="text"
+      id="search"
+      placeholder="Search for songs/albums or artist!"
+      @input="updateSearchText"
+    />
+    <div class="buttons">
+      <button id="play" @click="play('HQ1nvhLf1EU')">1</button>
+      <button @click="play('eFEjDCMNqYs')">2</button>
+      <button id="pause" @click="pause()">Pause</button>
+      <button id="next" @click="next()">Next</button>
+      <button id="previous" @click="previous()">Previous</button>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      current: {},
-      index: 0,
-      playingNow: false,
       songs: [],
-    }
+      searchId: "",
+    };
   },
+
+  props: ["song"],
 
   /* computed: {
     storeSongs() {
@@ -55,9 +60,16 @@ export default {
       window.player.loadVideoById(previousId);
       window.player.previousVideo();
     },
-    
+
     updateSearchText(e) {
       this.$store.commit("updateSearchText", e.target.value);
+    },
+
+    mounted() {
+      fetch("https://yt-music-api.herokuapp.com/api/yt/search/")
+        .then((res) => res.json())
+        .then((data) => (this.songs = data))
+        .catch((err) => console.log(err.message));
     },
   },
 };
