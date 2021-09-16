@@ -1,17 +1,35 @@
 import { createStore } from "vuex";
+import axios from "axios";
 
 export default createStore({
   state: {
-    songs:[
-      {
-        title: "eFEjDCMNqYs"
-      },
-      {
-        title: "HQ1nvhLf1EU"
-      },
-    ],
+    searchText: "",
+    searchResult: [],
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    setSearchResult(state, payload) {
+      state.searchResult = payload;
+    },
+    updateSearchText(state, payload) {
+      state.searchText = payload;
+      console.log('searchText set to:' + this.state.searchText)
+    },
+  },
+
+  getters: {},
+
+  actions: {
+    async fetchSearchedText() {
+      await axios
+        .get(
+          "https://yt-music-api.herokuapp.com/api/yt/search/" +
+            this.state.searchText)
+        .then(response => {
+          this.commit("setSearchResult", response.data);
+          console.log("action response data:" + response.data);
+          console.log(this.state.searchResult);
+        });
+    },
+  },
   modules: {},
 });
