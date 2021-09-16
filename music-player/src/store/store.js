@@ -12,6 +12,7 @@ export default createStore({
     },
     updateSearchText(state, payload) {
       state.searchText = payload;
+      console.log('searchText set to:' + this.state.searchText)
     },
   },
 
@@ -23,7 +24,7 @@ export default createStore({
         .get(
           "https://yt-music-api.herokuapp.com/api/yt/search/" +
             this.state.searchText)
-        .then((response) => {
+        .then(response => {
           this.commit("setSearchResult", response.data);
           console.log("action response data:" + response.data);
           console.log(this.state.searchResult);

@@ -15,14 +15,14 @@ export default {
   data() {
     return {
       searchText: this.searchText,
-    };
+    }
   },
 
   methods: {
     search() {
 
         // PÅBÖRJA HÄR searchText undefined vid implementering inom parenteser.
-      this.$store.commit("updateSearchText");
+      this.$store.commit("updateSearchText", this.searchText);
       this.$store.dispatch("fetchSearchedText");
     },
   },
