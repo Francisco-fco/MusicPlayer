@@ -5,12 +5,6 @@
       <h3>ARTIST NAME</h3>
       <h3>IMAGE</h3>
     </div>
-    <input
-      type="text"
-      id="search"
-      placeholder="Search for songs/albums or artist!"
-      @input="updateSearchText"
-    />
     <div class="buttons">
       <button id="play" @click="play('HQ1nvhLf1EU')">1</button>
       <button @click="play('eFEjDCMNqYs')">2</button>
@@ -23,13 +17,6 @@
 
 <script>
 export default {
-  data() {
-    return {
-      songs: [],
-      searchId: "",
-    };
-  },
-
   props: ["song"],
 
   /* computed: {
@@ -61,16 +48,12 @@ export default {
       window.player.previousVideo();
     },
 
-    updateSearchText(e) {
-      this.$store.commit("updateSearchText", e.target.value);
-    },
-
-    mounted() {
-      fetch("https://yt-music-api.herokuapp.com/api/yt/search/")
+    /*mounted() {
+      fetch("https://yt-music-api.herokuapp.com/api/yt/search/" + searchId)
         .then((res) => res.json())
         .then((data) => (this.songs = data))
         .catch((err) => console.log(err.message));
-    },
+    },*/
   },
 };
 </script>
