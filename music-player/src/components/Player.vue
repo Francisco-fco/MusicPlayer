@@ -32,18 +32,10 @@ export default {
   },
 
   methods: {
-    play() {
-      let result = this.$store.getters.getSearchResult
-       let videoId = result.videoId
-       console.log("VIDEO-ID: " + videoId)
-       this.$store.commit("updateVideoId" + videoId)
-       this.$store.dispatch("fetchVideoId")
-      // calling global variable
-      window.player.loadVideoById(videoId);
-      // this.$store.commit("updateVideoId", this.videoId)
 
-      //--- "fetchSearchedText" ALREADY IN SEARCHBAR DISPATCH --------------------------------------------
-      // this.$store.dispatch("fetchSearchedText");
+    play() {
+      // calling global variable
+      window.player.loadVideoById();
       window.player.playVideo();
       console.log("playing videoId");
     },
@@ -63,16 +55,7 @@ export default {
       window.player.previousVideo();
     },
 
-    computed: {
-      getSearchResult() {
-       let result = this.$store.getter.getVideoId
-       let videoId = result.videoId
-       console.log("VIDEO-ID: " + videoId)
-       this.$store.commit("updateVideoId" + videoId)
-       this.$store.dispatch("fetchVideoId")
-      // this.$store.commit("updateVideoId" + videoId)
-      },
-    }
+
     /*mounted() {
       fetch("https://yt-music-api.herokuapp.com/api/yt/search/" + searchId)
         .then((res) => res.json())

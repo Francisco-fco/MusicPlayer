@@ -6,6 +6,7 @@ export default createStore({
     searchText: "",
     searchResult: [],
     videoId: "",
+    ids: [],
   },
 
   mutations: {
@@ -20,6 +21,9 @@ export default createStore({
       state.videoId = payload;
       console.log("videoId is:" + this.state.videoId);
     },
+    allIds(state, payload) {
+      state.ids = payload;
+    },
   },
 
   actions: {
@@ -31,10 +35,12 @@ export default createStore({
         )
         .then((response) => {
           this.commit("setSearchResult", response.data);
-          console.log("action response data:" + response.data);
+          console.log("RESPONSE DATA: " + response.data);
           console.log(this.state.searchResult);
         });
     },
+
+    // Få tag på videoId för att fullfölja fetchen
 
     async fetchVideoId() {
       await axios
@@ -43,7 +49,8 @@ export default createStore({
             this.state.videoId
         )
         .then((response) => {
-          console.log(response)
+          console.log( "Put id's in array!", response)
+          this.commit("allIds", response.data)
         });
     },
   },
