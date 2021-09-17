@@ -8,7 +8,7 @@
     <SearchBar />
     <div class="buttons">
       <!-- SOMETHING LIKE THAT (content.videoId)  -->
-      <button id="play" v-on:click="play(this.$store.state.searchResult + videoId)">1</button>
+      <button id="play" v-on:click="play(result)">Play</button>
 
       <button id="pause" @click="pause()">Pause</button>
       <button id="next" @click="next()">Next</button>
@@ -22,7 +22,7 @@ import SearchBar from "./SearchBar.vue";
 export default {
   data() {
     return {
-      videoId: this.videoId,
+      searchResult: this.searchResult,
     };
   },
 
@@ -31,12 +31,14 @@ export default {
   },
 
   methods: {
-    play() {
+    play(result) {
       // calling global variable
       window.player.loadVideoById();
       // this.$store.commit("updateVideoId", this.videoId)
-      this.$store.dispatch("fetchSearchedText");
-      window.player.playVideo();
+
+      //--- "fetchSearchedText" ALREADY IN SEARCHBAR DISPATCH --------------------------------------------
+      // this.$store.dispatch("fetchSearchedText");
+      window.player.playVideo(result);
       console.log("playing videoId");
     },
     pause() {
@@ -55,6 +57,12 @@ export default {
       window.player.previousVideo();
     },
 
+    computed: {
+      fetchSearchResult() {
+       let result = this.$store.getter.getSearchResult;
+       result.videoId;
+      }
+    }
     /*mounted() {
       fetch("https://yt-music-api.herokuapp.com/api/yt/search/" + searchId)
         .then((res) => res.json())

@@ -46,9 +46,9 @@ export default createStore({
   },
 
   getters: {
-    getVideoId() {
-      return this.state.videoId
-    },
+    getSearchResult() {
+      return this.state.searchResult
+    }
   },
 
   modules: {},
