@@ -8,7 +8,7 @@
     <SearchBar />
     <div class="buttons">
       <!-- SOMETHING LIKE THAT (content.videoId)  -->
-      <button id="play" v-on:click="play(result)">Play</button>
+      <button id="play" v-on:click="play()">Play</button>
 
       <button id="pause" @click="pause()">Pause</button>
       <button id="next" @click="next()">Next</button>
@@ -23,6 +23,7 @@ export default {
   data() {
     return {
       searchResult: this.searchResult,
+      videoId: this.videoId,
     };
   },
 
@@ -31,14 +32,19 @@ export default {
   },
 
   methods: {
-    play(result) {
+    play() {
+      let result = this.$store.getters.getSearchResult
+       let videoId = result.videoId
+       console.log("VIDEO-ID: " + videoId)
+       this.$store.commit("updateVideoId" + videoId)
+       this.$store.dispatch("fetchVideoId")
       // calling global variable
-      window.player.loadVideoById();
+      window.player.loadVideoById(videoId);
       // this.$store.commit("updateVideoId", this.videoId)
 
       //--- "fetchSearchedText" ALREADY IN SEARCHBAR DISPATCH --------------------------------------------
       // this.$store.dispatch("fetchSearchedText");
-      window.player.playVideo(result);
+      window.player.playVideo();
       console.log("playing videoId");
     },
     pause() {
@@ -46,22 +52,26 @@ export default {
     },
 
     next() {
-      let videoId = videoId;
-      window.player.loadVideoById(videoId);
+     // let videoId = videoId;
+      window.player.loadVideoById();
       window.player.nextVideo();
     },
 
     previous() {
-      let videoId = videoId;
-      window.player.loadVideoById(videoId);
+    //  let videoId = videoId;
+      window.player.loadVideoById();
       window.player.previousVideo();
     },
 
     computed: {
-      fetchSearchResult() {
-       let result = this.$store.getter.getSearchResult;
-       result.videoId;
-      }
+      getSearchResult() {
+       let result = this.$store.getter.getVideoId
+       let videoId = result.videoId
+       console.log("VIDEO-ID: " + videoId)
+       this.$store.commit("updateVideoId" + videoId)
+       this.$store.dispatch("fetchVideoId")
+      // this.$store.commit("updateVideoId" + videoId)
+      },
     }
     /*mounted() {
       fetch("https://yt-music-api.herokuapp.com/api/yt/search/" + searchId)
