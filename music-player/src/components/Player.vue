@@ -7,8 +7,9 @@
     </div>
     <SearchBar />
     <div class="buttons">
-      <button id="play" @click="play('HQ1nvhLf1EU')">1</button>
-      <button @click="play('eFEjDCMNqYs')">2</button>
+      <!-- SOMETHING LIKE THAT (content.videoId)  -->
+      <button id="play" v-on:click="play(this.$store.state.searchResult + videoId)">1</button>
+
       <button id="pause" @click="pause()">Pause</button>
       <button id="next" @click="next()">Next</button>
       <button id="previous" @click="previous()">Previous</button>
@@ -19,31 +20,38 @@
 <script>
 import SearchBar from "./SearchBar.vue";
 export default {
-  props: ["song"],
+  data() {
+    return {
+      videoId: this.videoId,
+    };
+  },
 
   components: {
     SearchBar,
   },
 
   methods: {
-    play(id) {
+    play() {
       // calling global variable
-      window.player.loadVideoById(id);
+      window.player.loadVideoById();
+      // this.$store.commit("updateVideoId", this.videoId)
+      this.$store.dispatch("fetchSearchedText");
       window.player.playVideo();
+      console.log("playing videoId");
     },
     pause() {
       window.player.pauseVideo();
     },
 
     next() {
-      let videoId = "eFEjDCMNqYs";
+      let videoId = videoId;
       window.player.loadVideoById(videoId);
       window.player.nextVideo();
     },
 
     previous() {
-      let previousId = "HQ1nvhLf1EU";
-      window.player.loadVideoById(previousId);
+      let videoId = videoId;
+      window.player.loadVideoById(videoId);
       window.player.previousVideo();
     },
 

@@ -5,7 +5,9 @@ export default createStore({
   state: {
     searchText: "",
     searchResult: [],
-  },
+    // videoId: "",
+    },
+
   mutations: {
     setSearchResult(state, payload) {
       state.searchResult = payload;
@@ -13,8 +15,12 @@ export default createStore({
     },
     updateSearchText(state, payload) {
       state.searchText = payload;
-      console.log('searchText set to:' + this.state.searchText)
+      console.log('searchText is:' + this.state.searchText)
     },
+    // updateVideoId(state, payload) {
+    //   state.videoId = payload;
+    //   console.log('videoId is:' + this.state.videoId)
+    // },
   },
 
 
@@ -22,13 +28,28 @@ export default createStore({
     async fetchSearchedText() {
       await axios
         .get(
-          "https://yt-music-api.herokuapp.com/api/yt/search/" + this.state.searchText)
+          "https://yt-music-api.herokuapp.com/api/yt/songs/" + this.state.searchText)
         .then(response => {
           this.commit("setSearchResult", response.data);
           console.log("action response data:" + response.data);
           console.log(this.state.searchResult);
         });
     },
+
+    // async fetchVideoId() {
+    //   await axios
+    //   .get("https://yt-music-api.herokuapp.com/api/yt/search/videoId/" + this.state.videoId)
+    //   .then(response => {
+    //     this.commit("updateVideoId", response.data);
+    //   })
+    // }
   },
+
+  getters: {
+    getVideoId() {
+      return this.state.videoId
+    },
+  },
+
   modules: {},
 });

@@ -1,6 +1,6 @@
 <template>
   <div class="result-container">
-       <span>{{ this.$store.state.searchResult}}</span>
+       <span>{{ this.$store.state.searchResult }}</span>
   </div>
 </template>
 
@@ -11,12 +11,6 @@ export default {
             searchResult: this.searchResult,
         }
     },
-
- computed: {
-    searchedResult() {
-      return this.$store.getters.getSearchResult;
-    },
-  },
 }
 </script>
 
