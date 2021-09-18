@@ -1,5 +1,6 @@
 <template>
   <div class="player-container">
+    <!--<Music v-for="music in allMusic" :key="music.videoId" :music="music"/> -->
     <div class="song-container">
       <h3>SONG NAME</h3>
       <h3>ARTIST NAME</h3>
@@ -7,7 +8,6 @@
     </div>
     <SearchBar />
     <div class="buttons">
-      <!-- SOMETHING LIKE THAT (content.videoId)  -->
       <button id="play" v-on:click="play()">Play</button>
       <button id="pause" @click="pause()">Pause</button>
       <button id="next" @click="next()">Next</button>

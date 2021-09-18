@@ -1,13 +1,27 @@
 <template>
   <div class="music-card">
-      <!-- START FROM HERE
-      
-          <div v-for=""></div> -->
+      <!-- 
+
+        <div>
+            {{}}
+        </div> -->
   </div>
 </template>
 
 <script>
 export default {
+    // data() {
+    //     return{
+    //         videoId: "",
+    //         name: "",
+    //     }
+    // },
+    
+    props: {
+        ['music'],
+    },
+
+    methods: {},
 
 }
 </script>

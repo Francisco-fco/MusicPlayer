@@ -17,13 +17,13 @@ export default createStore({
       state.searchText = payload;
       console.log("searchText is:" + this.state.searchText);
     },
-    updateVideoId(state, payload) {
-      state.videoId = payload;
-      console.log("videoId is:" + this.state.videoId);
-    },
-    allIds(state, payload) {
-      state.ids = payload;
-    },
+    // updateVideoId(state, payload) {
+    //   state.videoId = payload;
+    //   console.log("videoId is:" + this.state.videoId);
+    // },
+    // allIds(state, payload) {
+    //   state.ids = payload;
+    // },
   },
 
   actions: {
@@ -33,36 +33,36 @@ export default createStore({
           "https://yt-music-api.herokuapp.com/api/yt/songs/" +
             this.state.searchText
         )
-        .then((response) => {
+        .then(response => {
+          console.log("FETCH-DATA: " + response.data);
           this.commit("setSearchResult", response.data);
-          console.log("RESPONSE DATA: " + response.data);
           console.log(this.state.searchResult);
         });
     },
 
-    // Få tag på videoId för att fullfölja fetchen
+    // Först få tag på videoId för att fullfölja fetchen
 
-    async fetchVideoId() {
-      await axios
-        .get(
-          "https://yt-music-api.herokuapp.com/api/yt/songs/" +
-            this.state.videoId
-        )
-        .then((response) => {
-          console.log( "Put id's in array!", response)
-          this.commit("allIds", response.data)
-        });
-    },
+    // async fetchVideoId() {
+    //   await axios
+    //     .get(
+    //       "https://yt-music-api.herokuapp.com/api/yt/songs/" +
+    //         this.state.videoId
+    //     )
+    //     .then((response) => {
+    //       console.log("Put id's in array!", response);
+    //       this.commit("allIds", response.data);
+    //     });
+    // },
   },
 
   getters: {
     getSearchResult(state) {
-      return state.searchResult
+      return state.searchResult;
     },
 
-    getVideoId(state) {
-      return state.videoId
-    }
+    // getVideoId(state) {
+    //   return state.videoId;
+    // },
   },
 
   modules: {},
