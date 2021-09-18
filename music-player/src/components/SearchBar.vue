@@ -16,7 +16,8 @@ export default {
   data() {
     return {
       searchText: this.searchText,
-    }
+      searchResult: this.searchResult,
+    };
   },
 
   methods: {

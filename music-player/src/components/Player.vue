@@ -9,7 +9,6 @@
     <div class="buttons">
       <!-- SOMETHING LIKE THAT (content.videoId)  -->
       <button id="play" v-on:click="play()">Play</button>
-
       <button id="pause" @click="pause()">Pause</button>
       <button id="next" @click="next()">Next</button>
       <button id="previous" @click="previous()">Previous</button>
@@ -55,13 +54,15 @@ export default {
       window.player.previousVideo();
     },
 
+  },
 
-    /*mounted() {
-      fetch("https://yt-music-api.herokuapp.com/api/yt/search/" + searchId)
-        .then((res) => res.json())
-        .then((data) => (this.songs = data))
-        .catch((err) => console.log(err.message));
-    },*/
+  computed: {
+    fetchSearchList() {
+      console.log(this.$store.getters.getSearchResult);
+      return this.store.getters.getSearchResult;
+      //  this.$store.commit("updateVideoId" + this.videoId)
+      //  this.$store.dispatch("fetchVideoId")
+    },
   },
 };
 </script>
