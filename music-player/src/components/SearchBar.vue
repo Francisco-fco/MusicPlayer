@@ -19,12 +19,17 @@
 </template>
 
 <script>
+import Music from "../components/Music.vue"
 export default {
   data() {
     return {
       searchText: this.searchText,
       searchResult: this.searchResult,
     };
+  },
+
+  components: {
+    Music,
   },
 
   computed: {

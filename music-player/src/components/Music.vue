@@ -33,9 +33,7 @@ export default {
     //     }
     // },
 
-    props: {
-        ['music'],
-    },
+    props: ['music'],
 
     methods: {},
 
