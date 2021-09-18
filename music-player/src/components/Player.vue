@@ -1,6 +1,5 @@
 <template>
   <div class="player-container">
-    <!--<Music v-for="music in allMusic" :key="music.videoId" :music="music"/> -->
     <div class="song-container">
       <h3>SONG NAME</h3>
       <h3>ARTIST NAME</h3>
@@ -54,15 +53,6 @@ export default {
       window.player.previousVideo();
     },
 
-  },
-
-  computed: {
-    fetchSearchList() {
-      console.log(this.$store.getters.getSearchResult);
-      return this.store.getters.getSearchResult;
-      //  this.$store.commit("updateVideoId" + this.videoId)
-      //  this.$store.dispatch("fetchVideoId")
-    },
   },
 };
 </script>

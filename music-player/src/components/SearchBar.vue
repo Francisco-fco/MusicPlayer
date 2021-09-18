@@ -8,6 +8,13 @@
       v-model="searchText"
     />
     <span>{{ searchText }}</span>
+    <div class="searchResult">
+      <ol>
+        <li v-for="music in fetchSearchList" :key="music">
+          <Music :music="music" />
+        </li>
+      </ol>
+    </div>
   </div>
 </template>
 
@@ -18,6 +25,13 @@ export default {
       searchText: this.searchText,
       searchResult: this.searchResult,
     };
+  },
+
+  computed: {
+    fetchSearchList() {
+      console.log(this.$store.getters.getSearchResult);
+      return this.$store.getters.getSearchResult;
+    },
   },
 
   methods: {
