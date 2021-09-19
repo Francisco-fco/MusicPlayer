@@ -8,7 +8,7 @@
       <p>Id: {{ music.videoId }}</p>
       <button @click="Play(music.videoId)">Play</button>
       <button @click="Pause(music.videoId)">Pause</button>
-      <button @click="Share(music.videoId)">Share song</button>
+      <button @click="Share()">Share song</button>
     </div>
     <div class="artista" v-if="music.type == 'artist'">
       <p>Type: {{ music.type }}</p>
@@ -44,13 +44,9 @@ export default {
       console.log("playing videoId");
     },
 
-    Paus(paus) {
-      window.player.pauseVideo(paus);
+    Pause(pause) {
+      window.player.pauseVideo(pause);
     },
-
-    Share() {
-        
-    }
   },
 };
 </script>
