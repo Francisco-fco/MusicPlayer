@@ -35,7 +35,21 @@ export default {
 
     props: ['music'],
 
-    methods: {},
+    computed: {
+        fetchSearchList() {
+        console.log(this.$store.getters.getSearchResult);
+        return this.$store.getters.getSearchResult;
+    },
+    },
+
+    methods: {
+        Play(play) {
+      // calling global variable
+      window.player.loadVideoById(play);
+      window.player.playVideo();
+      console.log("playing videoId");
+    },
+    },
 
 }
 </script>

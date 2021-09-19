@@ -2,7 +2,6 @@
   <div class="container">
     <Player />
     <div class="result-container">
-    <span>{{ this.$store.state.searchResult }}</span>
   </div>
   </div>
 </template>

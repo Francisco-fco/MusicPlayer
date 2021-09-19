@@ -7,7 +7,7 @@
     </div>
     <SearchBar />
     <div class="buttons">
-      <button id="play" v-on:click="play()">Play</button>
+      <button id="play" v-on:click="play(getVideoId)">Play</button>
       <button id="pause" @click="pause()">Pause</button>
       <button id="next" @click="next()">Next</button>
       <button id="previous" @click="previous()">Previous</button>
@@ -20,9 +20,14 @@ import SearchBar from "./SearchBar.vue";
 export default {
   data() {
     return {
-      searchResult: this.searchResult,
       videoId: this.videoId,
     };
+  },
+
+  computed: {
+    getVideoId(){
+      return this.$store.getters.getVideoId;
+    }
   },
 
   components: {
@@ -31,9 +36,9 @@ export default {
 
   methods: {
 
-    play() {
+    play(getVideoId) {
       // calling global variable
-      window.player.loadVideoById();
+      window.player.loadVideoById(getVideoId);
       window.player.playVideo();
       console.log("playing videoId");
     },

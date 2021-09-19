@@ -10,21 +10,23 @@
     <span>{{ searchText }}</span>
     <div class="searchResult">
       <ol>
-        <li v-for="music in fetchSearchList" :key="music">
+        <li v-for="music in fetchSearchList.content" :key="music">
           <Music :music="music" />
         </li>
       </ol>
     </div>
+    {{ fetchSearchList.content }}
   </div>
 </template>
 
 <script>
-import Music from "../components/Music.vue"
+import Music from "../components/Music.vue";
 export default {
   data() {
     return {
       searchText: this.searchText,
       searchResult: this.searchResult,
+      videoId: this.videoId,
     };
   },
 
@@ -33,8 +35,12 @@ export default {
   },
 
   computed: {
+    getVideoId() {
+      return this.$store.getters.getVideoId;
+    },
+
     fetchSearchList() {
-      console.log(this.$store.getters.getSearchResult);
+      console.log(this.$store.getters.getSearchResult.content);
       return this.$store.getters.getSearchResult;
     },
   },
@@ -42,7 +48,9 @@ export default {
   methods: {
     search() {
       this.$store.commit("updateSearchText", this.searchText);
+      this.$store.commit("setVideoId", this.videoId);
       this.$store.dispatch("fetchSearchedText");
+      this.$store.dispatch("fetchVideoId")
     },
   },
 };
