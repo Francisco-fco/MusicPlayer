@@ -3,10 +3,10 @@
 
   <div class="player-container">
     <div class="buttons">
-      <button id="play" v-on:click="play(music.videoId)">Play</button>
-      <button id="pause" @click="pause()">Pause</button>
-      <button id="next" @click="next()">Next</button>
-      <button id="previous" @click="previous()">Previous</button>
+      <button id="play" @click="Play(music.videoId)">Play</button>
+      <button id="pause" @click="Pause(music.videoId)">Pause</button>
+      <button id="next" @click="Next(music.videoId)">Next</button>
+      <button id="share" @click="Share()">Share</button>
     </div>
   </div>
 </template>
