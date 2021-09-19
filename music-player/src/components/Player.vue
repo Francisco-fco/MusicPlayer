@@ -5,8 +5,8 @@
     <div class="buttons">
       <button id="play" @click="Play(music.videoId)">Play</button>
       <button id="pause" @click="Pause(music.videoId)">Pause</button>
-      <button id="next" @click="Next(music.videoId)">Next</button>
-      <button id="share" @click="Share()">Share</button>
+      <button id="next" @click="Next(music.videoId)"></button>
+      <button id="share" @click="Share()">Share song</button>
     </div>
   </div>
 </template>
