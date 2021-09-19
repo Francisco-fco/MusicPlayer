@@ -1,4 +1,7 @@
 <template>
+
+<!-- MIGHT NOT NEED THIS COMPONENT -->
+
   <div class="player-container">
     <div class="song-container">
       <h3>SONG NAME</h3>
