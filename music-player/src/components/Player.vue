@@ -1,16 +1,9 @@
 <template>
-
-<!-- MIGHT NOT NEED THIS COMPONENT -->
+  <!-- MIGHT NOT NEED THIS COMPONENT -->
 
   <div class="player-container">
-    <div class="song-container">
-      <h3>SONG NAME</h3>
-      <h3>ARTIST NAME</h3>
-      <h3>IMAGE</h3>
-    </div>
-    <SearchBar />
     <div class="buttons">
-      <button id="play" v-on:click="play(getVideoId)">Play</button>
+      <button id="play" v-on:click="play(music.videoId)">Play</button>
       <button id="pause" @click="pause()">Pause</button>
       <button id="next" @click="next()">Next</button>
       <button id="previous" @click="previous()">Previous</button>
@@ -19,7 +12,6 @@
 </template>
 
 <script>
-import SearchBar from "./SearchBar.vue";
 export default {
   data() {
     return {
@@ -28,17 +20,14 @@ export default {
   },
 
   computed: {
-    getVideoId(){
+    getVideoId() {
       return this.$store.getters.getVideoId;
-    }
+    },
   },
 
-  components: {
-    SearchBar,
-  },
+  components: {},
 
   methods: {
-
     play(getVideoId) {
       // calling global variable
       window.player.loadVideoById(getVideoId);
@@ -50,17 +39,16 @@ export default {
     },
 
     next() {
-     // let videoId = videoId;
+      // let videoId = videoId;
       window.player.loadVideoById();
       window.player.nextVideo();
     },
 
     previous() {
-    //  let videoId = videoId;
+      //  let videoId = videoId;
       window.player.loadVideoById();
       window.player.previousVideo();
     },
-
   },
 };
 </script>
@@ -95,6 +83,7 @@ header {
   display: flex;
   justify-content: center;
   padding: 1vw;
+  margin: 1vw;
   background-color: chocolate;
   margin-left: 30%;
   margin-right: 30%;

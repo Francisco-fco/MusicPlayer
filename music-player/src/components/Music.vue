@@ -7,51 +7,48 @@
       <p>Album: {{ music.album.name }}</p>
       <p>Id: {{ music.videoId }}</p>
       <button @click="Play(music.videoId)">Play</button>
+      <button @click="Pause(music.videoId)">Pause</button>
       <button @click="Share()">Share song</button>
     </div>
     <div class="artista" v-if="music.type == 'artist'">
-        <p>Type: {{ music.type }}</p>
-        <p>Artist: {{ music.name }}</p>
-        <p>Browse ID: {{ music.browseId }}</p>
-        <button @click="Share(music.browseId)">Share artist</button>
+      <p>Type: {{ music.type }}</p>
+      <p>Artist: {{ music.name }}</p>
+      <p>Browse ID: {{ music.browseId }}</p>
+      <button @click="Share(music.browseId)">Share artist</button>
     </div>
     <div class="album" v-if="music.type == 'album'">
-        <p>Type: {{ music.type }}</p>
-        <p>Name: {{ music.name }}</p>
-        <p>BrowseId: {{ music.browseId }}</p>
-        <button @click="Share(music.browseId)">Share album</button>
+      <p>Type: {{ music.type }}</p>
+      <p>Name: {{ music.name }}</p>
+      <p>BrowseId: {{ music.browseId }}</p>
+      <button @click="Share(music.browseId)">Share album</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-    // data() {
-    //     return{
-    //         videoId: "",
-    //         name: "",
-    //     }
-    // },
+  props: ["music"],
 
-    props: ['music'],
-
-    computed: {
-        fetchSearchList() {
-        console.log(this.$store.getters.getSearchResult);
-        return this.$store.getters.getSearchResult;
+  computed: {
+    fetchSearchList() {
+      console.log(this.$store.getters.getSearchResult);
+      return this.$store.getters.getSearchResult;
     },
-    },
+  },
 
-    methods: {
-        Play(play) {
+  methods: {
+    Play(play) {
       // calling global variable
       window.player.loadVideoById(play);
       window.player.playVideo();
       console.log("playing videoId");
     },
-    },
 
-}
+    Paus(paus) {
+      window.player.pauseVideo(paus);
+    },
+  },
+};
 </script>
 
 <style></style>

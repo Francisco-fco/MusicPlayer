@@ -7,7 +7,6 @@
       v-on:keyup.enter="search(searchText)"
       v-model="searchText"
     />
-    <span>{{ searchText }}</span>
     <div class="searchResult">
       <ol>
         <li v-for="music in fetchSearchList.content" :key="music">
@@ -55,4 +54,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+  input {
+  width: 40%;
+  padding: 0.5vw;
+  margin: 1vw;
+}
+</style>
