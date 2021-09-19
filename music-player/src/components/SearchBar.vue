@@ -15,7 +15,6 @@
         </li>
       </ol>
     </div>
-    {{ fetchSearchList.content }}
   </div>
 </template>
 
