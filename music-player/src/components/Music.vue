@@ -1,29 +1,38 @@
 <template>
   <div class="music-card">
     <div class="cancion" v-if="music.type == 'song'">
-      <p>Type: {{ music.type }}</p>
-      <p>Name: {{ music.name }}</p>
-      <p>Image: {{ music.thumbnails.url }}</p>
-      <p>Artist: {{ music.artist.name }}</p>
-      <p>Album: {{ music.album.name }}</p>
-      <p>Id: {{ music.videoId }}</p>
+      <h2>Type: {{ music.type }}</h2>
+      <h4>Name: {{ music.name }}</h4>
+      <h4>Image: {{ music.thumbnails.url }}</h4>
+      <h4>Artist: {{ music.artist.name }}</h4>
+      <h4>Album: {{ music.album.name }}</h4>
+      <h4>Id: {{ music.videoId }}</h4>
       <button @click="Play(music.videoId)">Play</button>
       <button @click="Pause(music.videoId)">Pause</button>
-      <button @click="Share()">Share</button>
-      <router-link to="/share"></router-link>;
+      <button @click="Share()">
+        <router-link
+          to="/share"
+          custom
+          v-slot="{ href, route, navigate, isActive}"
+        >
+          <NavLink :active="isActive" :href="href" @click="navigate">{{
+            route.fullPath
+          }}</NavLink>
+        </router-link>
+      </button>
     </div>
     <div class="artista" v-if="music.type == 'artist'">
-      <p>Type: {{ music.type }}</p>
-      <p>Artist: {{ music.name }}</p>
-      <p>Image: {{ music.thumbnails.url }}</p>
-      <p>Browse ID: {{ music.browseId }}</p>
+      <h2>Type: {{ music.type }}</h2>
+      <h4>Artist: {{ music.name }}</h4>
+      <h4>Image: {{ music.thumbnails.url }}</h4>
+      <h4>Browse ID: {{ music.browseId }}</h4>
       <button @click="Share(music.browseId)">Share</button>
     </div>
     <div class="album" v-if="music.type == 'album'">
-      <p>Type: {{ music.type }}</p>
-      <p>Name: {{ music.name }}</p>
-      <p>Image: {{ music.thumbnails.url }}</p>
-      <p>BrowseId: {{ music.browseId }}</p>
+      <h2>Type: {{ music.type }}</h2>
+      <h4>Name: {{ music.name }}</h4>
+      <h4>Image: {{ music.thumbnails.url }}</h4>
+      <h4>BrowseId: {{ music.browseId }}</h4>
       <button @click="Share(music.browseId)">Share</button>
     </div>
   </div>
@@ -57,4 +66,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+h2 {
+  padding: 1.2vw;
+}
+
+h4 {
+  margin: 0.5vw;
+}
+</style>

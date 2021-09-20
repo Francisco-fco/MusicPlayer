@@ -8,13 +8,11 @@
       v-model="searchText"
     />
     <div class="searchResult">
-      <ol>
-        <li v-for="music in fetchSearchList.content" :key="music">
+        <div v-for="music in fetchSearchList.content" :key="music">
           <Music :music="music" />
-        </li>
-      </ol>
+        </div>
     </div>
-    {{ fetchSearchList.content }}
+  <!--  {{ fetchSearchList.content }} -->
   </div>
 </template>
 
@@ -60,5 +58,10 @@ export default {
   width: 40%;
   padding: 0.5vw;
   margin: 1vw;
+}
+
+.searchResult > div {
+  margin: 1.5vw;
+  font-size: 18;
 }
 </style>

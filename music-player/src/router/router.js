@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
+import ShareDetails from "../views/ShareDetails";
 
 const routes = [
   {
@@ -18,7 +19,8 @@ const routes = [
   },
   {
     path: "/share",
-    name: "Share"
+    name: "Share",
+    component: ShareDetails,
   },
 ];
 
