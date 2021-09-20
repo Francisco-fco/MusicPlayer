@@ -1,5 +1,8 @@
 <template>
   <div class="search-container">
+    <div id="isPlaying">
+      <h2>Now Playing: </h2>
+    </div>
     <input
       type="text"
       id="search"
@@ -32,9 +35,11 @@ export default {
   },
 
   computed: {
+
     getVideoId() {
       return this.$store.getters.getVideoId;
     },
+   
 
     fetchSearchList() {
       console.log("I NEED TO SE THIS: " + this.$store.getters.getSearchResult.content);
@@ -47,7 +52,7 @@ export default {
       this.$store.commit("updateSearchText", this.searchText);
       this.$store.commit("setVideoId", this.videoId);
       this.$store.dispatch("fetchSearchedText");
-      this.$store.dispatch("fetchVideoId")
+      this.$store.dispatch("fetchVideoId");
     },
   },
 };
