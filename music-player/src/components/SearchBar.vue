@@ -11,7 +11,7 @@
       v-model="searchText"
     />
     <div class="searchResult">
-        <div v-for="music in fetchSearchList.content" :key="music">
+        <div v-for="music in fetchSearchList" :key="music">
           <Music :music="music" />
         </div>
     </div>
@@ -26,7 +26,6 @@ export default {
     return {
       searchText: this.searchText,
       searchResult: this.searchResult,
-      videoId: this.videoId,
     };
   },
 
@@ -35,14 +34,8 @@ export default {
   },
 
   computed: {
-
-    getVideoId() {
-      return this.$store.getters.getVideoId;
-    },
-   
-
     fetchSearchList() {
-      console.log("I NEED TO SE THIS: " + this.$store.getters.getSearchResult.content);
+      console.log("I NEED TO SE THIS: ", this.$store.getters.getSearchResult);
       return this.$store.getters.getSearchResult;
     },
   },
@@ -50,9 +43,9 @@ export default {
   methods: {
     search() {
       this.$store.commit("updateSearchText", this.searchText);
-      this.$store.commit("setVideoId", this.videoId);
+     // this.$store.commit("setVideoId", this.videoId);
       this.$store.dispatch("fetchSearchedText");
-      this.$store.dispatch("fetchVideoId");
+     // this.$store.dispatch("fetchVideoId");
     },
   },
 };

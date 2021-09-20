@@ -3,7 +3,7 @@
     <div class="cancion" v-if="music.type == 'song'">
       <h2>Type: {{ music.type }}</h2>
       <h4>Name: {{ music.name }}</h4>
-      <h4>Image: {{ music.thumbnails.url }}</h4>
+      <h4>Image: {{ music.thumbnails }}</h4>
       <h4>Artist: {{ music.artist.name }}</h4>
       <h4>Album: {{ music.album.name }}</h4>
       <h4>Id: {{ music.videoId }}</h4>

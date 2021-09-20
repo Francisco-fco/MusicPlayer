@@ -5,56 +5,38 @@ export default createStore({
   state: {
     searchText: "",
     searchResult: [],
-    videoId:"",
   },
 
   mutations: {
     setSearchResult(state, payload) {
-      state.searchResult = payload;
+      console.log("SETTER CONTEXT", payload)
+      state.searchResult.content = payload;
+      // someway PROXY starts to show up here
+      // console.log("SETTER CONTEXT 2",state.searchResult) 
+
     },
     updateSearchText(state, payload) {
       state.searchText = payload;
       console.log("searchText is:" + this.state.searchText);
     },
-
-    setVideoId(state, payload) {
-      state.videoId = payload;
-    },
   },
 
   actions: {
     async fetchSearchedText() {
-      await axios
-        .get(
-          "https://yt-music-api.herokuapp.com/api/yt/search/" +
-            this.state.searchText
-        )
+      await axios.get("https://yt-music-api.herokuapp.com/api/yt/search/" + this.state.searchText)
         .then(response => {
-          console.log("FETCH-DATA: " + response.data.content);
-          this.commit("setSearchResult", response.data);
-          console.log(this.state.searchResult);
+          console.log("FETCH-DATA: " , response.data.content);
+          this.commit("setSearchResult", response.data.content);
+          console.log("ALL INFO", response.data.content);
         });
     },
-    
-    async fetchVideoId() {
-      await axios .get("https://yt-music-api.herokuapp.com/api/yt/search/" + this.state.searchText)
-      .then(response => {
-        console.log("Fetch-ID: " + response.data)
-        this.commit("setVideoId", response.data)
-
-      })
-    }
   },
 
   getters: {
     getSearchResult(state) {
-      return state.searchResult;
+      console.log("GETTER LOG", state.searchResult)
+      return state.searchResult.content;
     },
-
-    getVideoId(state) {
-      return state.videoId;
-    }
   },
-
   modules: {},
 });
