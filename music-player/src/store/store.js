@@ -30,7 +30,7 @@ export default createStore({
             this.state.searchText
         )
         .then(response => {
-          console.log("FETCH-DATA: " + response.data);
+          console.log("FETCH-DATA: " + response.data.content);
           this.commit("setSearchResult", response.data);
           console.log(this.state.searchResult);
         });

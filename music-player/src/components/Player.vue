@@ -3,48 +3,35 @@
 
   <div class="player-container">
     <div class="buttons">
+      <button id="previous" @click="Prev(music.videoId)">Prev</button>
       <button id="next" @click="Next(music.videoId)">Next</button>
-      <button id="next" @click="Prev(music.videoId)">Prev</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      videoId: this.videoId,
-    };
-  },
+  props: ["music"],
 
   computed: {
-    getVideoId() {
-      return this.$store.getters.getVideoId;
+    fetchSearchList() {
+      console.log(this.$store.getters.getSearchResult);
+      return this.$store.getters.getSearchResult;
     },
   },
 
   components: {},
 
   methods: {
-    play(getVideoId) {
-      // calling global variable
-      window.player.loadVideoById(getVideoId);
-      window.player.playVideo();
-      console.log("playing videoId");
-    },
-    pause() {
-      window.player.pauseVideo();
-    },
-
-    next() {
+    Next(next) {
       // let videoId = videoId;
-      window.player.loadVideoById();
+      window.player.loadVideoById(next);
       window.player.nextVideo();
     },
 
-    previous() {
+    Prev(previous) {
       //  let videoId = videoId;
-      window.player.loadVideoById();
+      window.player.loadVideoById(previous);
       window.player.previousVideo();
     },
   },

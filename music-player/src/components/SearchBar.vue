@@ -14,6 +14,7 @@
         </li>
       </ol>
     </div>
+    {{ fetchSearchList.content }}
   </div>
 </template>
 
@@ -38,7 +39,7 @@ export default {
     },
 
     fetchSearchList() {
-      console.log(this.$store.getters.getSearchResult.content);
+      console.log("I NEED TO SE THIS: " + this.$store.getters.getSearchResult.content);
       return this.$store.getters.getSearchResult;
     },
   },
