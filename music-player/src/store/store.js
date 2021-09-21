@@ -16,6 +16,8 @@ export default createStore({
   },
 
   mutations: {
+
+  // ---- UPDATED VALUES --------------------------------
     setSearchResult(state, payload) {
       console.log("SETTER CONTEXT", payload);
       state.searchResult.content = payload;
@@ -37,14 +39,14 @@ export default createStore({
       console.log("ARTIST: ", this.state.artist);
     },
 
-  // ---- NO NEED --------------
+  // ---- Album not needed --------------
 
     updateAlbum(state, payload) {
       state.album = payload;
       console.log("ALBUM: ", payload);
     },
   
-  //-------------------------------  
+  //----- SHARED SONG & ARTIST ------------------------  
 
     setSharedSong(state, payload) {
       state.sharedSong = payload;
@@ -60,6 +62,10 @@ export default createStore({
       state.sharedArtist = payload;
       console.log("Artist Name Is Set!", payload);
     },
+
+    setSharedArtistResult(state, payload) {
+      state.sharedArtistResult = payload
+    }
   },
 
   actions: {
