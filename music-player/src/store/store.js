@@ -5,6 +5,7 @@ export default createStore({
   state: {
     searchText: "",
     searchResult: [],
+    artistName: "",
   },
 
   mutations: {
@@ -19,6 +20,11 @@ export default createStore({
       state.searchText = payload;
       console.log("searchText is:" + this.state.searchText);
     },
+
+    setSharedArtist(state, payload) {
+      state.artistName = payload;
+      console.log("Artist Name Is Set!")
+    }
   },
 
   actions: {
@@ -30,12 +36,25 @@ export default createStore({
           console.log("ALL INFO", response.data.content);
         });
     },
+
+    async fetchArtist() {
+      await axios.get("https://yt-music-api.herokuapp.com/api/yt/artist" + this.state.artistName)
+        .then(response => {
+          this.commit("setArtistName", response.data)
+          console.log("Artist NAME: ", response.data)
+        })
+    }
   },
 
   getters: {
     getSearchResult(state) {
       console.log("GETTER LOG", state.searchResult)
       return state.searchResult.content;
+    },
+
+    getArtistName(state) {
+      console.log("GET ARTISTNAME", state.artistName)
+      return state.artistName;
     },
   },
   modules: {},

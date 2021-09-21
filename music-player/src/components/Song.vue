@@ -3,7 +3,7 @@
     <div class="cancion" v-if="music.type == 'song'">
       <h2>Type: {{ music.type }}</h2>
       <h4>Name: {{ music.name }}</h4>
-      <h4>Image: {{ music.thumbnails }}</h4>
+      <h4>Image: {{ music.thumbnails.url }}</h4>
       <h4>Artist: {{ music.artist.name }}</h4>
       <h4>Album: {{ music.album.name }}</h4>
       <h4>Id: {{ music.videoId }}</h4>
@@ -13,7 +13,7 @@
         <router-link
           to="/share"
           custom
-          v-slot="{ href, route, navigate, isActive}"
+          v-slot="{ href, route, navigate, isActive }"
         >
           <NavLink :active="isActive" :href="href" @click="navigate">{{
             route.fullPath
@@ -21,25 +21,16 @@
         </router-link>
       </button>
     </div>
-    <div class="artista" v-if="music.type == 'artist'">
-      <h2>Type: {{ music.type }}</h2>
-      <h4>Artist: {{ music.name }}</h4>
-      <h4>Image: {{ music.thumbnails.url }}</h4>
-      <h4>Browse ID: {{ music.browseId }}</h4>
-      <button @click="Share(music.browseId)">Share</button>
-    </div>
-    <div class="album" v-if="music.type == 'album'">
-      <h2>Type: {{ music.type }}</h2>
-      <h4>Name: {{ music.name }}</h4>
-      <h4>Image: {{ music.thumbnails.url }}</h4>
-      <h4>BrowseId: {{ music.browseId }}</h4>
-      <button @click="Share(music.browseId)">Share</button>
-    </div>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      artistName: this.artistName,
+    };
+  },
   props: ["music"],
 
   computed: {
@@ -61,7 +52,9 @@ export default {
       window.player.pauseVideo(pause);
     },
 
-    Share() {},
+    Share() {
+      this.$store.commit("setSharedArtist", this.artistName);
+    },
   },
 };
 </script>
@@ -73,5 +66,9 @@ h2 {
 
 h4 {
   margin: 0.5vw;
+}
+
+.cancion{
+  margin-bottom: 2vh;
 }
 </style>

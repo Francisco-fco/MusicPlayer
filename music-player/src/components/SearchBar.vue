@@ -3,6 +3,8 @@
     <div id="isPlaying">
       <h2>Now Playing: </h2>
     </div>
+
+    <!--  -->
     <input
       type="text"
       id="search"
@@ -12,15 +14,28 @@
     />
     <div class="searchResult">
         <div v-for="music in fetchSearchList" :key="music">
-          <Music :music="music" />
-        </div>
+          <Song :music="music" />
+        </div>        
+    </div>
+    <div class="searchResult">
+        <div v-for="music in fetchSearchList" :key="music">
+          <Artist :music="music" />
+        </div>        
+    </div>
+    <div class="searchResult">
+        <div v-for="music in fetchSearchList" :key="music">
+          <Album :music="music" />
+        </div>        
     </div>
   <!--  {{ fetchSearchList.content }} -->
   </div>
 </template>
 
 <script>
-import Music from "../components/Music.vue";
+import Artist from "./Artist.vue";
+import Song from "./Song.vue";
+import Album from "./Album.vue";
+
 export default {
   data() {
     return {
@@ -30,7 +45,9 @@ export default {
   },
 
   components: {
-    Music,
+    Song,
+    Artist,
+    Album,
   },
 
   computed: {
