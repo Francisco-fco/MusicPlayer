@@ -1,14 +1,14 @@
 <template>
-  <div class="music-card">
-    <div class="cancion" v-if="music.type == 'song'">
-      <h2>Type: {{ music.type }}</h2>
-      <h4>Name: {{ music.name }}</h4>
-      <h4>Image: {{ music.thumbnails.url }}</h4>
-      <h4>Artist: {{ music.artist.name }}</h4>
-      <h4>Album: {{ music.album.name }}</h4>
-      <h4>Id: {{ music.videoId }}</h4>
-      <button @click="Play(music.videoId)">Play</button>
-      <button @click="Pause(music.videoId)">Pause</button>
+  <div class="song-card">
+    <div class="cancion" v-if="song.type == 'song'">
+      <h2>Type: {{ song.type }}</h2>
+      <h4>Name: {{ song.name }}</h4>
+      <h4>Image: {{ song.thumbnails }}</h4>
+      <h4>Artist: {{ song.artist.name }}</h4>
+      <h4>Album: {{ song.album.name }}</h4>
+      <h4>Id: {{ song.videoId }}</h4>
+      <button @click="Play(song.videoId)">Play</button>
+      <button @click="Pause(song.videoId)">Pause</button>
       <button @click="Share()">
         <router-link
           to="/share"
@@ -31,7 +31,7 @@ export default {
       artistName: this.artistName,
     };
   },
-  props: ["music"],
+  props: ["song"],
 
   computed: {
     fetchSearchList() {
@@ -51,7 +51,6 @@ export default {
     Pause(pause) {
       window.player.pauseVideo(pause);
     },
-
     Share() {
       this.$store.commit("setSharedArtist", this.artistName);
     },

@@ -1,9 +1,10 @@
 <template>
-  <div class="artista" v-if="music.type == 'artist'">
-      <h2>Type: {{ music.type }}</h2>
-      <h4>Artist: {{ music.name }}</h4>
-      <h4>Image: {{ music.thumbnails.url }}</h4>
-      <h4>Browse ID: {{ music.browseId }}</h4>
+  <div class="artist-card">
+    <div class="artista" v-if="artist.type == 'artist'">
+      <h2>Type: {{ artist.type }}</h2>
+      <h4>Artist: {{ artist.name }}</h4>
+      <h4>Image: {{ artist.thumbnails }}</h4>
+      <h4>Browse ID: {{ artist.browseId }}</h4>
       <button @click="Share()">
         <router-link
           to="/share"
@@ -16,11 +17,12 @@
         </router-link>
       </button>
     </div>
+  </div>
 </template>
 
 <script>
 export default {
-  props: ["music"],
+  props: ["artist"],
 
   computed: {
     fetchSearchList() {
@@ -28,10 +30,10 @@ export default {
       return this.$store.getters.getSearchResult;
     },
   },
-
-}
+  method: {
+    Share() {},
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

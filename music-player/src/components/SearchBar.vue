@@ -13,18 +13,24 @@
       v-model="searchText"
     />
     <div class="searchResult">
-        <div v-for="music in fetchSearchList" :key="music">
-          <Song :music="music" />
+        <div v-for="song in fetchSearchList" :key="song">
+          <Song :song="song" />
         </div>        
     </div>
+    <br>
+    <hr>
+    <br>
     <div class="searchResult">
-        <div v-for="music in fetchSearchList" :key="music">
-          <Artist :music="music" />
+        <div v-for="artist in fetchSearchList" :key="artist">
+          <Artist :artist="artist" />
         </div>        
     </div>
+    <br />
+    <hr />
+    <br />
     <div class="searchResult">
-        <div v-for="music in fetchSearchList" :key="music">
-          <Album :music="music" />
+        <div v-for="album in fetchSearchList" :key="album">
+          <Album :album="album" />
         </div>        
     </div>
   <!--  {{ fetchSearchList.content }} -->
@@ -63,6 +69,9 @@ export default {
      // this.$store.commit("setVideoId", this.videoId);
       this.$store.dispatch("fetchSearchedText");
      // this.$store.dispatch("fetchVideoId");
+    },
+     Share() {
+      this.$store.commit("setSharedArtist", this.artistName);
     },
   },
 };
