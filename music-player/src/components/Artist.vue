@@ -34,7 +34,7 @@ export default {
       return this.$store.getters.getArtist;
     },
   },
-  method: {
+  methods: {
     Share() {
       this.$store.commit("setSharedArtist", this.artist);
       this.$store.dispatch("fetchSharedArtist")
