@@ -33,8 +33,8 @@ export default {
   props: ["song"],
 
   computed: {
-    fetchSong() {
-      console.log("Need to see this: " + this.$store.getters.getSong);
+    getSong() {
+      console.log("Need to see this: " , this.$store.getters.getSong);
       return this.$store.getters.getSong;
     },
   },
