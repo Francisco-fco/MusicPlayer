@@ -22,6 +22,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      artistName: this.artistName,
+    }
+  },
   props: ["artist"],
 
   computed: {
@@ -31,7 +36,10 @@ export default {
     },
   },
   method: {
-    Share() {},
+    Share() {
+      this.$store.commit("updateArtist" + this.artistName);
+
+    },
   },
 };
 </script>

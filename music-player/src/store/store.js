@@ -5,8 +5,16 @@ export default createStore({
   state: {
     searchText: "",
     searchResult: [],
-    artist: {},
-    album: {},
+    artist: {
+      type: "",
+      name: "",
+    },
+    album: {
+      type: "",
+      name: "",
+      artist: "",
+      year: ""
+    },
     song: {},
     thumbNail: [
       {
@@ -25,6 +33,26 @@ export default createStore({
     updateSearchText(state, payload) {
       state.searchText = payload;
       console.log("searchText is:" + this.state.searchText);
+    },
+
+    updateSong(state, payload) {
+      state.song = payload;
+      console.log("SONG: ", payload);
+    },
+
+    updateArtist(state, payload) {
+      state.artist = payload;
+      console.log("ARTIST: " + payload)
+    },
+
+    updateAlbum(state, payload) {
+      state.album = payload;
+      console.log("ALBUM: ", payload)
+    },
+
+    setSharedSong(state, payload) {
+      state.song = payload;
+      console.log("SHARED SONG: " + payload)
     },
 
     setSharedArtist(state, payload) {
@@ -47,16 +75,28 @@ export default createStore({
         });
     },
 
+    async fetchSong() {
+      await axios.get("https://yt-music-api.herokuapp.com/api/yt/search/" + this.state.searchText)
+        .then(response => {
+          this.commit("updateSong", response.data)
+          console.log("Hämtad artist: ", response.data)
+        })
+    },
+
+    async fetchAlbum() {
+      await axios.get("https://yt-music-api.herokuapp.com/api/yt/search/" + this.state.searchText)
+        .then(response => {
+          this.commit('updateAlbum', response.data)
+          console.log("Hämtad Album: ")
+        })
+    },
+    
     async fetchArtist() {
-      await axios
-        .get(
-          "https://yt-music-api.herokuapp.com/api/yt/artist" +
-            this.state.searchText
-        )
-        .then((response) => {
-          this.commit("setArtistName", response.data);
-          console.log("Artist NAME: ", response.data);
-        });
+      await axios.get("https://yt-music-api.herokuapp.com/api/yt/artists/" + this.state.artist.name)
+      .then(response => {
+        this.commit("setSharedArtist", response.data)
+        console.log("Hämtad artist: ", response.data)
+      })
     },
   },
 

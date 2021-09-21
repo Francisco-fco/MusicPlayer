@@ -47,6 +47,7 @@ export default {
     return {
       searchText: this.searchText,
       searchResult: this.searchResult,
+      artistName: this.artistName,
     };
   },
 
