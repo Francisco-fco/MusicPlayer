@@ -30,6 +30,7 @@ export default {
 
   computed: {
     fetchSearchList() {
+        console.log("get search-result in Share.vue!!!" , this.$store.getters.getSearchResult)
       return this.$store.getters.getSearchResult;
     },
   },

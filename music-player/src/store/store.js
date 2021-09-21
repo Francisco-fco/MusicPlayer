@@ -14,9 +14,9 @@ export default createStore({
     
     thumbNail: [],
     sharedSong: {},
-    sharedSongResult: [],
+    sharedSongResult: {},
     sharedArtist: {},
-    sharedArtistResult: [],
+    sharedArtistResult: {},
   },
 
   mutations: {
@@ -58,17 +58,16 @@ export default createStore({
 
     setSharedSong(state, payload) {
       state.sharedSong = payload;
-      console.log("SHARED SONG: ", payload);
+      console.log("Song name is set to: ", payload);
     },
 
     setSharedSongResult(state, payload) {
       state.sharedSonResult = payload;
-      console.log("Show Shared Song: ", payload)
     },
 
     setSharedArtist(state, payload) {
       state.sharedArtist = payload;
-      console.log("Artist Name Is Set!", payload);
+      console.log("Artist name is set to: ", payload);
     },
 
     setSharedArtistResult(state, payload) {
@@ -137,7 +136,6 @@ export default createStore({
         )
         .then((response) => {
           this.commit("setSharedArtistResult", response.data);
-          console.log("Hämtad artist: ", response.data);
         });
     },
 
@@ -149,7 +147,6 @@ export default createStore({
         )
         .then((response) => {
           this.commit("setSharedSongResult", response.data);
-          console.log("Hämtad låt: ", response.data);
         });
     },
   },
