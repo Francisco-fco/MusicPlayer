@@ -5,12 +5,12 @@
     </div>
     <h1>{{ this.$store.getters.getSearchResult.song }}</h1>
 
-    <div id="<artist-loop" v-for="artist in fetchSearchList" :key="artist">
+    <div id="<artist-loop" v-for="(artist, i) in fetchSearchList" :key="i">
       <Artist :artist="artist" />
     </div>
     <h1>{{ this.$store.getters.getSearchResult.artist }}</h1>
 
-    <div id="artist-loop" v-for="album in fetchSearchList" :key="album">
+    <div id="album-loop" v-for="(album, i) in fetchSearchList" :key="i">
       <Album :album="album" />
     </div>
     <h1>{{ this.$store.getters.getSearchResult.album }}</h1>

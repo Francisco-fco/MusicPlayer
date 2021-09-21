@@ -28,15 +28,14 @@
 export default {
   data() {
     return {
-      artistName: this.artistName,
     };
   },
   props: ["song"],
 
   computed: {
-    fetchSearchList() {
-      console.log("Need to see this: " + this.$store.getters.getSearchResult);
-      return this.$store.getters.getSearchResult;
+    fetchSong() {
+      console.log("Need to see this: " + this.$store.getters.getSong);
+      return this.$store.getters.getSong;
     },
   },
 
@@ -52,7 +51,7 @@ export default {
       window.player.pauseVideo(pause);
     },
     Share() {
-      this.$store.commit("setSharedSong", this.artistName);
+      this.$store.commit("setSharedSong", this.song);
     },
   },
 };

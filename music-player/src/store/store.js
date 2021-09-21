@@ -149,7 +149,7 @@ export default createStore({
     },
 
     getSong(state) {
-      console.log("GET SONG: ")
+      console.log("GET SONG: ", state.song)
       return state.song;
       
     },
