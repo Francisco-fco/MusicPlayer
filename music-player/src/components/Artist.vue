@@ -24,21 +24,20 @@
 export default {
   data() {
     return {
-      artistName: this.artistName,
     }
   },
   props: ["artist"],
 
   computed: {
     getArtistName() {
-      console.log("Need to see this: " + this.$store.getters.getArtistName);
-      return this.$store.getters.getArtistName;
+      console.log("Need to see this: " + this.$store.getters.getArtist);
+      return this.$store.getters.getArtist;
     },
   },
   method: {
     Share() {
-      this.$store.commit("updateArtist" + this.artistName);
-      this.$store.dispatch("fetchArtist" + this.artistName)
+      this.$store.commit("setSharedArtist", this.artist);
+      this.$store.dispatch("fetchSharedArtist")
 
     },
   },

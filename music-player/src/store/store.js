@@ -12,6 +12,7 @@ export default createStore({
     sharedSong: {},
     sharedSongResult: [],
     sharedArtist: {},
+    sharedArtistResult: [],
   },
 
   mutations: {
@@ -102,14 +103,14 @@ export default createStore({
 
     //-------------------------------------------------
 
-    async fetchArtist() {
+    async fetchSharedArtist() {
       await axios
         .get(
           "https://yt-music-api.herokuapp.com/api/yt/artists/" +
             this.state.searchText
         )
         .then((response) => {
-          this.commit("setSharedArtist", response.data);
+          this.commit("setSharedArtistResult", response.data);
           console.log("Hämtad artist: ", response.data);
         });
     },
@@ -133,14 +134,14 @@ export default createStore({
       return state.searchResult.content;
     },
 
-    getArtistName(state) {
+    getArtist(state) {
       console.log("GET ARTISTNAME", state.artist);
-      return state.artist;
+      return state.sharedArtistResult;
     },
 
     getSong(state) {
       console.log("GET SONG: ", state.song)
-      return state.song;
+      return state.sharedSongResult;
       
     },
   },
