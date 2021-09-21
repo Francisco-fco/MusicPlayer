@@ -30,14 +30,15 @@ export default {
   props: ["artist"],
 
   computed: {
-    fetchSearchList() {
-      console.log("Need to see this: " + this.$store.getters.getSearchResult);
-      return this.$store.getters.getSearchResult;
+    getArtistName() {
+      console.log("Need to see this: " + this.$store.getters.getArtistName);
+      return this.$store.getters.getArtistName;
     },
   },
   method: {
     Share() {
       this.$store.commit("updateArtist" + this.artistName);
+      this.$store.dispatch("fetchArtist" + this.artistName)
 
     },
   },

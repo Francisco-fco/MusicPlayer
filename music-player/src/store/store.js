@@ -5,27 +5,12 @@ export default createStore({
   state: {
     searchText: "",
     searchResult: [],
-    artist: {
-      name: "",
-      browseId: "",
-    },
-    album: {
-      type: "",
-      name: "",
-      artist: "",
-      year: "",
-    },
-    song: {
-      type: "",
-      name: "",
-      videoId: "",
-    },
-    thumbNail: [
-      {
-        url: "",
-      },
-    ],
+    artist: {},
+    album: {},
+    song: {},
+    thumbNail: [],
     sharedSong: {},
+    sharedSongResult: [],
     sharedArtist: {},
   },
 
@@ -43,12 +28,12 @@ export default createStore({
 
     updateSong(state, payload) {
       state.song = payload;
-      console.log("SONG: ", payload);
+      console.log("SONG: ", this.state.song);
     },
 
     updateArtist(state, payload) {
       state.artist = payload;
-      console.log("ARTIST: " + payload);
+      console.log("ARTIST: ", this.state.artist);
     },
 
   // ---- NO NEED --------------
@@ -62,7 +47,12 @@ export default createStore({
 
     setSharedSong(state, payload) {
       state.sharedSong = payload;
-      console.log("SHARED SONG: " + payload);
+      console.log("SHARED SONG: ", payload);
+    },
+
+    setSharedSongResult(state, payload) {
+      state.sharedSonResult = payload;
+      console.log("Show Shared Song: ", payload)
     },
 
     setSharedArtist(state, payload) {
@@ -116,7 +106,7 @@ export default createStore({
       await axios
         .get(
           "https://yt-music-api.herokuapp.com/api/yt/artists/" +
-            this.state.artist.name
+            this.state.searchText
         )
         .then((response) => {
           this.commit("setSharedArtist", response.data);
@@ -128,10 +118,10 @@ export default createStore({
       await axios
         .get(
           "https://yt-music-api.herokuapp.com/https://yt-music-api.herokuapp.com/api/yt/songs/" +
-            this.state.song.name
+            this.state.song
         )
         .then((response) => {
-          this.commit("setSharedSong", response.data);
+          this.commit("setSharedSongResult", response.data);
           console.log("Hämtad låt: ", response.data);
         });
     },

@@ -20,24 +20,17 @@
 <script>
 import Song from "./Song.vue";
 import Artist from "./Artist.vue";
-import Album from "./Album.vue";
 export default {
-  props: ["song", "artist", "album"],
+  props: ["song", "artist"],
 
   components: {
     Song,
     Artist,
-    Album,
   },
 
   computed: {
     fetchSearchList() {
       return this.$store.getters.getSearchResult;
-    },
-
-    getArtistName(state) {
-      console.log("GET ARTISTNAME", state.artistName);
-      return state.artistName;
     },
   },
 };

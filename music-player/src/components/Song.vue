@@ -52,6 +52,7 @@ export default {
     },
     Share() {
       this.$store.commit("setSharedSong", this.song);
+      this.$store.dispatch("fetchSharedSong")
     },
   },
 };
