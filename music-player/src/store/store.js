@@ -6,21 +6,27 @@ export default createStore({
     searchText: "",
     searchResult: [],
     artist: {
-      type: "",
       name: "",
+      browseId: "",
     },
     album: {
       type: "",
       name: "",
       artist: "",
-      year: ""
+      year: "",
     },
-    song: {},
+    song: {
+      type: "",
+      name: "",
+      videoId: "",
+    },
     thumbNail: [
       {
         url: "",
       },
     ],
+    sharedSong: {},
+    sharedArtist: {},
   },
 
   mutations: {
@@ -42,21 +48,25 @@ export default createStore({
 
     updateArtist(state, payload) {
       state.artist = payload;
-      console.log("ARTIST: " + payload)
+      console.log("ARTIST: " + payload);
     },
+
+  // ---- NO NEED --------------
 
     updateAlbum(state, payload) {
       state.album = payload;
-      console.log("ALBUM: ", payload)
+      console.log("ALBUM: ", payload);
     },
+  
+  //-------------------------------  
 
     setSharedSong(state, payload) {
-      state.song = payload;
-      console.log("SHARED SONG: " + payload)
+      state.sharedSong = payload;
+      console.log("SHARED SONG: " + payload);
     },
 
     setSharedArtist(state, payload) {
-      state.artistName = payload;
+      state.sharedArtist = payload;
       console.log("Artist Name Is Set!", payload);
     },
   },
@@ -76,27 +86,54 @@ export default createStore({
     },
 
     async fetchSong() {
-      await axios.get("https://yt-music-api.herokuapp.com/api/yt/search/" + this.state.searchText)
-        .then(response => {
-          this.commit("updateSong", response.data)
-          console.log("Hämtad artist: ", response.data)
-        })
+      await axios
+        .get(
+          "https://yt-music-api.herokuapp.com/api/yt/songs/" +
+            this.state.searchText
+        )
+        .then((response) => {
+          this.commit("updateSong", response.data);
+          console.log("Hämtad artist: ", response.data);
+        });
     },
 
+    //--- MIGHT NOT NEED THIS -------------------
     async fetchAlbum() {
-      await axios.get("https://yt-music-api.herokuapp.com/api/yt/search/" + this.state.searchText)
-        .then(response => {
-          this.commit('updateAlbum', response.data)
-          console.log("Hämtad Album: ")
-        })
+      await axios
+        .get(
+          "https://yt-music-api.herokuapp.com/api/yt/search/" +
+            this.state.searchText
+        )
+        .then((response) => {
+          this.commit("updateAlbum", response.data);
+          console.log("Hämtad Album: ");
+        });
     },
-    
+
+    //-------------------------------------------------
+
     async fetchArtist() {
-      await axios.get("https://yt-music-api.herokuapp.com/api/yt/artists/" + this.state.artist.name)
-      .then(response => {
-        this.commit("setSharedArtist", response.data)
-        console.log("Hämtad artist: ", response.data)
-      })
+      await axios
+        .get(
+          "https://yt-music-api.herokuapp.com/api/yt/artists/" +
+            this.state.artist.name
+        )
+        .then((response) => {
+          this.commit("setSharedArtist", response.data);
+          console.log("Hämtad artist: ", response.data);
+        });
+    },
+
+    async fetchSharedSong() {
+      await axios
+        .get(
+          "https://yt-music-api.herokuapp.com/https://yt-music-api.herokuapp.com/api/yt/songs/" +
+            this.state.song.name
+        )
+        .then((response) => {
+          this.commit("setSharedSong", response.data);
+          console.log("Hämtad låt: ", response.data);
+        });
     },
   },
 
@@ -107,8 +144,14 @@ export default createStore({
     },
 
     getArtistName(state) {
-      console.log("GET ARTISTNAME", state.artistName);
-      return state.artistName;
+      console.log("GET ARTISTNAME", state.artist);
+      return state.artist;
+    },
+
+    getSong(state) {
+      console.log("GET SONG: ")
+      return state.song;
+      
     },
   },
   modules: {},

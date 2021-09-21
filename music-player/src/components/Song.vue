@@ -52,7 +52,7 @@ export default {
       window.player.pauseVideo(pause);
     },
     Share() {
-      this.$store.commit("setSharedArtist", this.artistName);
+      this.$store.commit("setSharedSong", this.artistName);
     },
   },
 };
