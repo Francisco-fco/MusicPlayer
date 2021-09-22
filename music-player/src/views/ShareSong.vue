@@ -1,10 +1,21 @@
 <template>
-    <!-- <Share /> -->
-<div class="share-container">
-      <div id="song-loop" v-for="(song, i) in getSong" :key="i">
-        <Song :song="song" :type="'song'" />
+  <!-- <Share /> -->
+  <div class="share-container">
+    <div id="song-loop">
+      <Song v-for="(song, i) in getSong" :key="i" :song="song" :type="'song'" />
+
+      <div id="show-data">
+        <h2>Type: {{ this.$store.getters.getSong.type }}</h2>
+      <h4>Name: {{ this.$store.getters.getSong.name }}</h4>
+      <h4>Image: {{ this.$store.getters.getSong.thumbnails }}</h4>
+      <h4>Artist: {{ this.$store.getters.getSong.artist.name }}</h4>
+      <h4>Album: {{ this.$store.getters.getSong.album.name }}</h4>
+      <h4>Id: {{ this.$store.getters.getSong.videoId }}</h4>
+      <button @click="Play(this.$store.getters.getSong.videoId)">Play</button>
+      <button @click="Pause(this.$store.getters.getSong.videoId)">Pause</button>
       </div>
-</div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -13,9 +24,9 @@ import Song from "../components/Song.vue";
 export default {
   data() {
     return {
-        artistName: {},
-        songName: {},
-        albumName: {}
+      artistName: {},
+      songName: {},
+      albumName: {},
     };
   },
 
@@ -23,11 +34,24 @@ export default {
     Song,
   },
 
+  methods: {
+    Play(play) {
+      // calling global variable
+      window.player.loadVideoById(play);
+      window.player.playVideo();
+      console.log("playing videoId");
+    },
+
+    Pause(pause) {
+      window.player.pauseVideo(pause);
+    },
+  },
+
   computed: {
     getSong() {
       return this.$store.getters.getSong;
     },
-  }
+  },
 };
 </script>
 
