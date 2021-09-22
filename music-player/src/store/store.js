@@ -6,17 +6,15 @@ export default createStore({
     searchText: "",
     searchResult: [],
     artist: {},
+    updatedArtist: [0],
     album: {},
     song: {},
-
-// - Avslutade med att skapa den uppdaterade sång listan, kolla så att den körs igenom! -------------------------- 
-    updatedSong: [],
-    
+    updatedSong: [0],    
     thumbNail: [],
     sharedSong: {},
     sharedSongResult: {},
     sharedArtist: {},
-    sharedArtistResult: {},
+    sharedArtistResult: [],
   },
 
   mutations: {
@@ -45,6 +43,10 @@ export default createStore({
     updateArtist(state, payload) {
       state.artist = payload;
       console.log("ARTIST: ", this.state.artist);
+    },
+
+    setUpdatedArtist(state, payload) {
+      state.updatedArtist = payload
     },
 
   // ---- Album not needed --------------
@@ -96,7 +98,7 @@ export default createStore({
             this.state.searchText
         )
         .then((response) => {
-          this.commit("updateSong", response.data);
+          this.commit("setUpdatedSong", response.data);
           console.log("Hämtad artist: ", response.data);
         });
     },
@@ -107,7 +109,7 @@ export default createStore({
       await axios
       .get("https://yt-music-api.herokuapp.com/api/yt/artists/" + this.state.searchText)
       .then((response) => {
-        this.commit("updateArtist", response.data);
+        this.commit("setUpdatedArtist", response.data);
         console.log("Uppdaterar artist!")
       })
     },
@@ -130,10 +132,8 @@ export default createStore({
 
     async fetchSharedArtist() {
       await axios
-        .get(
-          "https://yt-music-api.herokuapp.com/api/yt/artists/" +
-            this.state.searchText
-        )
+        .get("https://yt-music-api.herokuapp.com/api/yt/artists/" +
+            this.state.searchText)
         .then((response) => {
           this.commit("setSharedArtistResult", response.data);
         });
@@ -156,6 +156,18 @@ export default createStore({
       console.log("GETTER LOG", state.searchResult);
       return state.searchResult.content;
     },
+
+    getUpdatedSong(state) {
+      return state.updatedSong;
+    },
+
+    getUpdatedArtist(state) {
+      return state.updatedArtist;
+    },
+
+
+
+// ---- SHARED -------------------------------------
 
     getArtist(state) {
       console.log("GET ARTISTNAME", state.sharedArtistResult);

@@ -3,8 +3,6 @@
     <div id="isPlaying">
       <h2>Now Playing: </h2>
     </div>
-
-    <!--  -->
     <input
       type="text"
       id="search"
@@ -13,7 +11,7 @@
       v-model="searchText"
     />
     <div class="searchResult">
-        <div v-for="song in fetchSearchList" :key="song">
+        <div v-for="(song, i) in fetchSearchList" :key="i">
           <Song :song="song" />
         </div>        
     </div>
@@ -21,7 +19,7 @@
     <hr>
     <br>
     <div class="searchResult">
-        <div v-for="artist in fetchSearchList" :key="artist">
+        <div v-for="(artist, i) in fetchSearchList" :key="i">
           <Artist :artist="artist" />
         </div>        
     </div>
@@ -67,12 +65,7 @@ export default {
   methods: {
     search() {
       this.$store.commit("updateSearchText", this.searchText);
-     // this.$store.commit("setVideoId", this.videoId);
       this.$store.dispatch("fetchSearchedText");
-     // this.$store.dispatch("fetchVideoId");
-    },
-     Share() {
-      this.$store.commit("setSharedArtist", this.artistName);
     },
   },
 };
