@@ -1,7 +1,7 @@
 <template>
   <div class="search-container">
     <div id="isPlaying">
-      <h2>Now Playing:</h2>
+      <h2>Now Playing: </h2>
     </div>
 
     <!--  -->
@@ -62,6 +62,7 @@ export default {
     search() {
       this.$store.commit("updateSearchText", this.searchText);
       this.$store.dispatch("fetchSearchedText");
+      this.$store.dispatch("fetchArtist", this.searchText);
     },
     Share() {
       this.$store.commit("setSharedArtist", this.artistName);
@@ -71,6 +72,28 @@ export default {
 </script>
 
 <style>
+
+#song-loop {
+  background-color: darkred;
+  color: #ffffff;
+  margin: 2vw;  
+  
+}
+
+#artist-loop {
+  background-color: rgba(0, 0, 0, 0.788);
+  color: #ffffff;
+  margin: 2vw;  
+  
+}
+
+#album-loop {
+  background-color: rgba(0, 0, 0, 0.788);
+  color: #ffffff;
+  margin: 2vw;  
+  
+}
+
 input {
   width: 40%;
   padding: 0.5vw;
@@ -78,7 +101,7 @@ input {
 }
 
 .searchResult > div {
-  margin: 1.5vw;
+  margin:2vw;
   font-size: 18;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <!-- <Share /> -->
 <div class="share-container">
-      <div id="song-loop" v-for="(song, i) in fetchSearchList" :key="i">
+      <div id="song-loop" v-for="(song, i) in getSong" :key="i">
         <Song :song="song" :type="'song'" />
       </div>
 </div>

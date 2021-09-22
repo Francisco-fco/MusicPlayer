@@ -10,7 +10,8 @@ export default createStore({
     song: {},
 
     // - Avslutade med att skapa den uppdaterade sång listan, kolla så att den körs igenom! --------------------------
-    updatedSong: [],
+    updatedSong: {},
+    updatedArtist: {},
 
     thumbNail: [],
     sharedSong: {},
@@ -94,7 +95,7 @@ export default createStore({
       await axios
         .get(
           "https://yt-music-api.herokuapp.com/api/yt/songs/" +
-            this.state.searchText
+            this.state.updatedSong
         )
         .then((response) => {
           this.commit("updateSong", response.data);
