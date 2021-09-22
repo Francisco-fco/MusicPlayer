@@ -5,17 +5,7 @@
       <h4>Artist: {{ artist.name }}</h4>
       <h4>Image: {{ artist.thumbnails }}</h4>
       <h4>Browse ID: {{ artist.browseId }}</h4>
-      <button @click="Share()">
-        <router-link
-          to="/share"
-          custom
-          v-slot="{ href, route, navigate, isActive }"
-        >
-          <NavLink :active="isActive" :href="href" @click="navigate">{{
-            route.fullPath
-          }}</NavLink>
-        </router-link>
-      </button>
+      <button @click="Share()"></button>
     </div>
   </div>
 </template>
@@ -23,8 +13,7 @@
 <script>
 export default {
   data() {
-    return {
-    }
+    return {};
   },
   props: ["artist"],
 
@@ -37,8 +26,8 @@ export default {
   methods: {
     Share() {
       this.$store.commit("setSharedArtist", this.artist);
-      this.$store.dispatch("fetchSharedArtist")
-
+      this.$store.dispatch("fetchSharedArtist");
+      this.$router.push({ path: "/share" });
     },
   },
 };

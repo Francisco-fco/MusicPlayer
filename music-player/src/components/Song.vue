@@ -9,17 +9,7 @@
       <h4>Id: {{ song.videoId }}</h4>
       <button @click="Play(song.videoId)">Play</button>
       <button @click="Pause(song.videoId)">Pause</button>
-      <button @click="Share()">
-        <router-link
-          to="/share"
-          custom
-          v-slot="{ href, route, navigate, isActive }"
-        >
-          <NavLink :active="isActive" :href="href" @click="navigate">{{
-            route.fullPath
-          }}</NavLink>
-        </router-link>
-      </button>
+      <button @click="Share()"></button>
     </div>
   </div>
 </template>
@@ -27,14 +17,13 @@
 <script>
 export default {
   data() {
-    return {
-    };
+    return {};
   },
   props: ["song"],
 
   computed: {
     getSong() {
-      console.log("Need to see this: " , this.$store.getters.getSong);
+      console.log("Need to see this: ", this.$store.getters.getSong);
       return this.$store.getters.getSong;
     },
   },
@@ -52,7 +41,8 @@ export default {
     },
     Share() {
       this.$store.commit("setSharedSong", this.song);
-      this.$store.dispatch("fetchSharedSong")
+      this.$store.dispatch("fetchSharedSong");
+      this.$router.push({ path: "/share" });
     },
   },
 };
@@ -67,7 +57,7 @@ h4 {
   margin: 0.5vw;
 }
 
-.cancion{
+.cancion {
   margin-bottom: 2vh;
 }
 </style>
