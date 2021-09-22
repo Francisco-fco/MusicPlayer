@@ -3,17 +3,17 @@
     <div id="<song-loop" v-for="(song, i) in fetchSearchList" :key="i">
       <Song :song="song" />
     </div>
-    <h1>{{ this.$store.getters.getSearchResult.song }}</h1>
+    <h1>{{ this.$store.getters.getSong }}</h1>
 
     <div id="<artist-loop" v-for="(artist, i) in fetchSearchList" :key="i">
       <Artist :artist="artist" />
     </div>
-    <h1>{{ this.$store.getters.getSearchResult.artist }}</h1>
+    <h1>{{ this.$store.getters.getArtist }}</h1>
 
-    <div id="album-loop" v-for="(album, i) in fetchSearchList" :key="i">
+    <!-- <div id="album-loop" v-for="(album, i) in fetchSearchList" :key="i">
       <Album :album="album" />
     </div>
-    <h1>{{ this.$store.getters.getSearchResult.album }}</h1>
+    <h1>{{ this.$store.getters.getSearchResult.album }}</h1> -->
   </div>
 </template>
 

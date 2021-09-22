@@ -14,7 +14,7 @@ export default createStore({
     
     thumbNail: [],
     sharedSong: {},
-    sharedSongResult: [],
+    sharedSongResult: [0],
     sharedArtist: {},
     sharedArtistResult: [],
   },
@@ -161,13 +161,13 @@ export default createStore({
     },
 
     getArtist(state) {
-      console.log("GET ARTISTNAME", state.sharedArtistResult);
-      return state.sharedArtistResult;
+      console.log("GET ARTISTNAME", state.sharedArtist);
+      return state.sharedArtist;
     },
 
     getSong(state) {
-      console.log("GET SONG: ", state.sharedSongResult)
-      return state.sharedSongResult;
+      console.log("GET SONG: ", state.sharedSong)
+      return state.sharedSong;
       
     },
   },
