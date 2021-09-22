@@ -9,25 +9,26 @@ export default createStore({
     album: {},
     song: {},
 
-// - Avslutade med att skapa den uppdaterade sång listan, kolla så att den körs igenom! -------------------------- 
+    // - Avslutade med att skapa den uppdaterade sång listan, kolla så att den körs igenom! --------------------------
     updatedSong: [],
-    
+
     thumbNail: [],
     sharedSong: {},
-    sharedSongResult: [0],
+    sharedSongResult: [],
     sharedArtist: {},
     sharedArtistResult: [],
   },
 
   mutations: {
+    // ---- UPDATED VALUES --------------------------------
 
-  // ---- UPDATED VALUES --------------------------------
+    // --
     setSearchResult(state, payload) {
       console.log("SETTER CONTEXT", payload);
       state.searchResult.content = payload;
-      // someway PROXY starts to show up here
-      // console.log("SETTER CONTEXT 2",state.searchResult)
     },
+
+    // -- Puts the search-input in state.searchText -----
     updateSearchText(state, payload) {
       state.searchText = payload;
       console.log("searchText is:" + this.state.searchText);
@@ -47,14 +48,14 @@ export default createStore({
       console.log("ARTIST: ", this.state.artist);
     },
 
-  // ---- Album not needed --------------
+    // ---- Album not needed --------------
 
     updateAlbum(state, payload) {
       state.album = payload;
       console.log("ALBUM: ", payload);
     },
-  
-  //----- SHARED SONG & ARTIST ------------------------  
+
+    //----- SHARED SONG & ARTIST ------------------------
 
     setSharedSong(state, payload) {
       state.sharedSong = payload;
@@ -63,7 +64,6 @@ export default createStore({
 
     setSharedSongResult(state, payload) {
       state.sharedSonResult = payload;
-      console.log("Show Shared Song: ", payload)
     },
 
     setSharedArtist(state, payload) {
@@ -72,8 +72,8 @@ export default createStore({
     },
 
     setSharedArtistResult(state, payload) {
-      state.sharedArtistResult = payload
-    }
+      state.sharedArtistResult = payload;
+    },
   },
 
   actions: {
@@ -98,7 +98,7 @@ export default createStore({
         )
         .then((response) => {
           this.commit("updateSong", response.data);
-          console.log("Hämtad artist: ", response.data);
+          console.log("Hämtad låt: ", response.data);
         });
     },
 
@@ -106,26 +106,29 @@ export default createStore({
 
     async fetchArtist() {
       await axios
-      .get("https://yt-music-api.herokuapp.com/api/yt/artists/" + this.state.searchText)
-      .then((response) => {
-        this.commit("updateArtist", response.data);
-        console.log("Uppdaterar artist!")
-      })
+        .get(
+          "https://yt-music-api.herokuapp.com/api/yt/artists/" +
+            this.state.searchText
+        )
+        .then((response) => {
+          this.commit("updateArtist", response.data);
+          console.log("Uppdaterar artist!");
+        });
     },
 
     //--- MIGHT NOT NEED THIS -------------------
 
-    // async fetchAlbum() {
-    //   await axios
-    //     .get(
-    //       "https://yt-music-api.herokuapp.com/api/yt/search/" +
-    //         this.state.searchText
-    //     )
-    //     .then((response) => {
-    //       this.commit("updateAlbum", response.data);
-    //       console.log("Hämtad Album: ");
-    //     });
-    // },
+    async fetchAlbum() {
+      await axios
+        .get(
+          "https://yt-music-api.herokuapp.com/api/yt/search/" +
+            this.state.searchText
+        )
+        .then((response) => {
+          this.commit("updateAlbum", response.data);
+          console.log("Hämtad Album: ", response.data);
+        });
+    },
 
     //----- SHARED FETCHES ----------------------------------------
 
@@ -137,7 +140,7 @@ export default createStore({
         )
         .then((response) => {
           this.commit("setSharedArtistResult", response.data);
-          console.log("Hämtad artist: ", response.data);
+          console.log("Hämtad artist: ", response.data.content[0]);
         });
     },
 
@@ -149,14 +152,13 @@ export default createStore({
         )
         .then((response) => {
           this.commit("setSharedSongResult", response.data);
-          console.log("Hämtad låt: ", response.data);
+          console.log("Hämtad låt: ", response.data.content[0]);
         });
     },
   },
 
   getters: {
     getSearchResult(state) {
-      console.log("GETTER LOG", state.searchResult);
       return state.searchResult.content;
     },
 
@@ -166,9 +168,8 @@ export default createStore({
     },
 
     getSong(state) {
-      console.log("GET SONG: ", state.sharedSong)
+      console.log("GET SONG: ", state.sharedSong);
       return state.sharedSong;
-      
     },
   },
   modules: {},

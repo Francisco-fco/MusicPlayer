@@ -9,7 +9,7 @@
       <h4>Id: {{ song.videoId }}</h4>
       <button @click="Play(song.videoId)">Play</button>
       <button @click="Pause(song.videoId)">Pause</button>
-      <button @click="Share()"></button>
+      <button @click="Share()">Share</button>
     </div>
   </div>
 </template>
@@ -42,6 +42,8 @@ export default {
     Share() {
       this.$store.commit("setSharedSong", this.song);
       this.$store.dispatch("fetchSharedSong");
+
+  // Implementera med routeUrl (KOLLA RADIOAPP)
       this.$router.push({ path: "/share" });
     },
   },

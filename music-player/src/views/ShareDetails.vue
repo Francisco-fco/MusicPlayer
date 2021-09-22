@@ -1,20 +1,26 @@
 <template>
-<div class="share-container">
-    <Share />
-</div>
-  
+  <div class="share-container">
+    <!-- <Share /> -->
+   <Player />
+  </div>
 </template>
 
 <script>
-import Share from '../components/Share.vue';
-export default {
-    components: {
-        Share
-    },
+import Player from "../components/Player.vue";
 
-}
+export default {
+  data() {
+    return {
+        artistName: {},
+        songName: {},
+        albumName: {}
+    };
+  },
+
+  components: {
+    Player,
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

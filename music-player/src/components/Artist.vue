@@ -5,7 +5,7 @@
       <h4>Artist: {{ artist.name }}</h4>
       <h4>Image: {{ artist.thumbnails }}</h4>
       <h4>Browse ID: {{ artist.browseId }}</h4>
-      <button @click="Share()"></button>
+      <button @click="Share()">Share</button>
     </div>
   </div>
 </template>

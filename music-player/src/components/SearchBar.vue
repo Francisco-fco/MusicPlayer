@@ -1,7 +1,7 @@
 <template>
   <div class="search-container">
     <div id="isPlaying">
-      <h2>Now Playing: </h2>
+      <h2>Now Playing:</h2>
     </div>
 
     <!--  -->
@@ -12,28 +12,24 @@
       v-on:keyup.enter="search(searchText)"
       v-model="searchText"
     />
-    <div class="searchResult">
-        <div v-for="song in fetchSearchList" :key="song">
-          <Song :song="song" />
-        </div>        
+    <!-- <Share /> -->
+    <div class="share-container">
+      <div id="song-loop" v-for="(song, i) in fetchSearchList" :key="i">
+        <Song :song="song" :type="song" />
+      </div>
+      {{ this.$store.getters.getSong }}
+
+      <!-- <Artist /> -->
+      <div id="artist-loop" v-for="(artist, i) in fetchSearchList" :key="i">
+        <Artist :artist="artist" :type="artist" />
+      </div>
+      <h1>{{ this.$store.getters.getArtist }}</h1>
+
+      <!-- <Album /> -->
+      <div id="album-loop" v-for="(album, i) in fetchSearchList" :key="i">
+        <Album :album="album" :type="album" />
+      </div>
     </div>
-    <br>
-    <hr>
-    <br>
-    <div class="searchResult">
-        <div v-for="artist in fetchSearchList" :key="artist">
-          <Artist :artist="artist" />
-        </div>        
-    </div>
-    <br />
-    <hr />
-    <br />
-    <div class="searchResult">
-        <div v-for="album in fetchSearchList" :key="album">
-          <Album :album="album" />
-        </div>        
-    </div>
-  <!--  {{ fetchSearchList.content }} -->
   </div>
 </template>
 
@@ -67,11 +63,9 @@ export default {
   methods: {
     search() {
       this.$store.commit("updateSearchText", this.searchText);
-     // this.$store.commit("setVideoId", this.videoId);
       this.$store.dispatch("fetchSearchedText");
-     // this.$store.dispatch("fetchVideoId");
     },
-     Share() {
+    Share() {
       this.$store.commit("setSharedArtist", this.artistName);
     },
   },
@@ -79,7 +73,7 @@ export default {
 </script>
 
 <style>
-  input {
+input {
   width: 40%;
   padding: 0.5vw;
   margin: 1vw;
