@@ -12,18 +12,16 @@
       v-on:keyup.enter="search(searchText)"
       v-model="searchText"
     />
-    <!-- <Share /> -->
+    <!-- <Song /> -->
     <div class="share-container">
       <div id="song-loop" v-for="(song, i) in fetchSearchList" :key="i">
         <Song :song="song" :type="song" />
       </div>
-      {{ this.$store.getters.getSong }}
 
       <!-- <Artist /> -->
       <div id="artist-loop" v-for="(artist, i) in fetchSearchList" :key="i">
         <Artist :artist="artist" :type="artist" />
       </div>
-      <h1>{{ this.$store.getters.getArtist }}</h1>
 
       <!-- <Album /> -->
       <div id="album-loop" v-for="(album, i) in fetchSearchList" :key="i">

@@ -44,7 +44,7 @@ export default {
       this.$store.dispatch("fetchSharedSong");
 
   // Implementera med routeUrl (KOLLA RADIOAPP)
-      this.$router.push({ path: "/share" });
+      this.$router.push({ path: "/share/song" });
     },
   },
 };

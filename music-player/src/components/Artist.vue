@@ -27,7 +27,7 @@ export default {
     Share() {
       this.$store.commit("setSharedArtist", this.artist);
       this.$store.dispatch("fetchSharedArtist");
-      this.$router.push({ path: "/share" });
+      this.$router.push({ path: "/share/artist" });
     },
   },
 };
