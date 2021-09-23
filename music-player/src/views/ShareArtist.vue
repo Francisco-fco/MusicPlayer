@@ -39,4 +39,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#show-data {
+  color: #ffffff;
+  padding: 2vw;
+  border-radius: 2vw;
+}
+</style>
