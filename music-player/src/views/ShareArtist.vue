@@ -2,7 +2,7 @@
   <div class="player-container">
     <!-- <Artist /> -->
     <div id="artist-loop">
-      <Artist v-for="(artist, i) in getArtistName"
+      <Artist v-for="(artist, i) in getArtist"
         :key="i"
         :artist="artist"
         :type="'artist'"
@@ -22,8 +22,7 @@ import Artist from "../components/Artist.vue";
 export default {
   data() {
     return {
-      artistName: this.artistName,
-      browseId: this.browseId,
+      
     };
   },
 
@@ -32,8 +31,8 @@ export default {
   },
 
   computed: {
-    getArtistName() {
-      console.log("Need to see this: " + this.$store.getters.getArtist);
+    getArtist() {
+      console.log("Need to see this: " + this.$store.getters.getArtist.name);
       return this.$store.getters.getArtist;
     },
   },

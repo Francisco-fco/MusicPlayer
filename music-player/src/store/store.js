@@ -153,7 +153,7 @@ export default createStore({
       await axios
         .get(
           "https://yt-music-api.herokuapp.com/api/yt/artists/" +
-            this.state.searchText
+            this.state.browseId
         )
         .then((response) => {
           this.commit("setSharedArtistResult", response.data);

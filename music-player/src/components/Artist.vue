@@ -36,22 +36,11 @@ export default {
   },
   methods: {
     Share() {
-      this.$store.commit("setSharedArtist", this.browseId)
-      this.$store.dispatch("fetchSharedArtist");
+      this.$store.commit("setSharedArtist", this.artist)
+      this.$store.dispatch("fetchSharedArtist")
       this.$router.push({ path: "/share/artist/" + this.browseId});
     },
   },
-  mounted() {
-        //This is step 1. Here we take the id form this pages url and puts it id int in data()
-        this.browseId = this.$route.params.browseId
-
-        //This is step 2. We take the id from the id int in data() and we send it to ProgramId int in store.js
-        // it will be used to fetch the correct program from springboot
-        this.$store.commit("setBrowseId", this.id)
-
-         
-         this.$store.dispatch("fetchBrowseId");
-    },
 };
 </script>
 
