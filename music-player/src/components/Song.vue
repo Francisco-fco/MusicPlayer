@@ -6,10 +6,12 @@
       <h3>Artist: {{ song.artist.name }}</h3>
       <h3>Album: {{ song.album.name }}</h3>
       <h3>Id: {{ song.videoId }}</h3>
-      <img v-bind:src="song.thumbnails[0].url">
+      <img v-bind:src="song.thumbnails[1].url">
       <button @click="Play(song.videoId)">Play</button>
       <button @click="Pause(song.videoId)">Pause</button>
-      <button @click="Share()">Share</button>
+      <button @click="Share()">Share
+      <!-- <router-link to="thisURL">Share</router-link> -->
+      </button>
     </div>
   </div>
 </template>
@@ -26,6 +28,13 @@ export default {
       console.log("Need to see this: ", this.$store.getters.getSong);
       return this.$store.getters.getSong;
     },
+
+  //   thisURL() {
+  //   let url = encodeURIComponent(this.song.thumbnails[1].url);
+  //   return {
+  //     "/share/" + this.song.name + "/" + this.song.artist + "/" + this.song.videoId + "/" + url + "/song"
+  //   };
+  // },
   },
 
   methods: {
@@ -49,15 +58,26 @@ export default {
 </script>
 
 <style>
-h1 {
-  padding: 1.2vw;
+.song-card {
+  display: flex;
+  flex-direction: column;
 }
 
-h3 {
-  margin: 0.5vw;
+.cancion {
+  position: relative;
+}
+
+.cancion > img {
+  position: absolute;
+  right: 75vw;
+  bottom: 18vh;
+  border-radius: 1vw;
 }
 
 .cancion > button {
+  margin-top: 2vh;
   margin-bottom: 5vh;
+  margin-left: 1.5vw;
+  margin-right: 1.5vw;
 }
 </style>
