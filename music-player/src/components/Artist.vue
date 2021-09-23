@@ -6,7 +6,9 @@
       <h3>Browse ID: {{ artist.browseId }}</h3>
       <img v-bind:src="artist.thumbnails[1].url">
 
-      <button @click="Share()">Share</button>
+      <button @click="Share()">Share
+        <router-link to="thisURL"></router-link>
+        </button>
     </div>
   </div>
 </template>
@@ -33,12 +35,25 @@ export default {
 
       return browseId;
     },
+
+    thisURL() {
+     let url = encodeURIComponent(this.artist.thumbnails[1].url);
+     return (
+     "/share/" + 
+      this.artist.name + 
+      "/" + 
+      this.artist.browseId + 
+      "/" + 
+      url + 
+      "/song"
+     );
+    },
   },
   methods: {
     Share() {
       this.$store.commit("setSharedArtist", this.artist)
       this.$store.dispatch("fetchSharedArtist")
-      this.$router.push({ path: "/share/artist/" + this.browseId});
+     // this.$router.push({ path: "/share/artist/" + this.browseId});
     },
   },
 };

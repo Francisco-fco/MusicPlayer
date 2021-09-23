@@ -10,7 +10,7 @@
       <button @click="Play(song.videoId)">Play</button>
       <button @click="Pause(song.videoId)">Pause</button>
       <button @click="Share()">Share
-      <!-- <router-link to="thisURL">Share</router-link> -->
+       <!-- <router-link to="thisURL">Share</router-link> -->
       </button>
     </div>
   </div>
@@ -30,11 +30,19 @@ export default {
     },
 
   //   thisURL() {
-  //   let url = encodeURIComponent(this.song.thumbnails[1].url);
-  //   return {
-  //     "/share/" + this.song.name + "/" + this.song.artist + "/" + this.song.videoId + "/" + url + "/song"
-  //   };
-  // },
+  //    let url = encodeURIComponent(this.song.thumbnails[1].url);
+  //    return {
+  //     "/share/" : 
+  //     this.song.name + 
+  //     "/" + 
+  //     this.song.artist + 
+  //     "/" + 
+  //     this.song.videoId + 
+  //     "/" + 
+  //     url + 
+  //     "/song"
+  //    };
+  //  },
   },
 
   methods: {
@@ -51,7 +59,7 @@ export default {
     Share() {
       this.$store.commit("setSharedSong", this.song);
       this.$store.dispatch("fetchSharedSong");
-      this.$router.push({ path: "/share/song"});
+      this.$router.push({ path: "/share/song" });
     },
   },
 };
@@ -70,7 +78,7 @@ export default {
 .cancion > img {
   position: absolute;
   right: 75vw;
-  bottom: 18vh;
+  bottom: 15vh;
   border-radius: 1vw;
 }
 
