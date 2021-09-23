@@ -11,7 +11,7 @@
         <h2>Artist:</h2>
         <h4>Name: {{ this.$store.getters.getArtist.name }}</h4>
         <h4>Browse ID: {{ this.$store.getters.getArtist.browseId }}</h4>
-        <img v-bind:src="this.$store.getters.getArtist.thumbnails[0].url">
+        <img v-bind:src="this.$store.getters.getArtist.thumbnails[1].url">
       </div>
     </div>
   </div>
@@ -39,4 +39,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+
+
+img {
+    border-radius: 1vw;
+
+}
+</style>

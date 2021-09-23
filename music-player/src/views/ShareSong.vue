@@ -7,7 +7,7 @@
       <div id="show-data">
         <h2>Song:</h2>
         <h4>Name: {{ this.$store.getters.getSong.name }}</h4>
-        <img v-bind:src="this.$store.getters.getSong.thumbnails[0].url">
+        <img v-bind:src="this.$store.getters.getSong.thumbnails[1].url">
         <h4>Artist: {{ this.$store.getters.getSong.artist.name }}</h4>
         <h4>Album: {{ this.$store.getters.getSong.album.name }}</h4>
         <h4>Id: {{ this.$store.getters.getSong.videoId }}</h4>

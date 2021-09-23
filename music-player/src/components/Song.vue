@@ -6,7 +6,7 @@
       <h3>Artist: {{ song.artist.name }}</h3>
       <h3>Album: {{ song.album.name }}</h3>
       <h3>Id: {{ song.videoId }}</h3>
-      <img v-bind:src="song.thumbnails[0].url">
+      <img v-bind:src="song.thumbnails[1].url">
       <button @click="Play(song.videoId)">Play</button>
       <button @click="Pause(song.videoId)">Pause</button>
       <button @click="Share()">Share</button>
@@ -49,15 +49,29 @@ export default {
 </script>
 
 <style>
-h1 {
-  padding: 1.2vw;
+.song-card {
+  display: flex;
+  flex-direction: column;
+}
+.cancion {
+  position: relative;
 }
 
-h3 {
-  margin: 0.5vw;
+img {
+  width: 10vw;
+  height: 15vh;
 }
 
+.cancion > img {
+  position: absolute;
+  right: 78vw;
+  bottom: 12vh;
+  border-radius: 1vw;
+}
 .cancion > button {
+  margin-top: 2vh;
   margin-bottom: 5vh;
+  margin-left: 1.5vw;
+  margin-right: 1.5vw;
 }
 </style>
