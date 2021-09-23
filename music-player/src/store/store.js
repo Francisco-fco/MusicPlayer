@@ -180,7 +180,8 @@ export default createStore({
     },
 
     getArtist(state) {
-      console.log("GET ARTISTNAME", state.sharedArtist);
+      console.log("GET ARTISTNAME", state.sharedArtist
+    );
       return state.sharedArtist;
     },
 
@@ -195,7 +196,7 @@ export default createStore({
     },
 
     getBrowseId(state) {
-      console.log("GET BROWSEID ", state.browseId);
+      console.log("GET Browse ID ", state.browseId);
       return state.browseId
     },
   },
