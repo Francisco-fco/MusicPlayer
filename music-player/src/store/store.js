@@ -8,28 +8,23 @@ export default createStore({
     artist: {},
     album: {},
     song: {},
-
-    // - Avslutade med att skapa den uppdaterade sång listan, kolla så att den körs igenom! --------------------------
     updatedSong: {},
     updatedArtist: {},
-
-    thumbNail: [],
+    thumbNails: [],
     sharedSong: {},
     sharedSongResult: [],
     sharedArtist: {},
     sharedArtistResult: [],
+    browseId: {},
   },
 
   mutations: {
-    // ---- UPDATED VALUES --------------------------------
 
-    // --
     setSearchResult(state, payload) {
       console.log("SETTER CONTEXT", payload);
       state.searchResult.content = payload;
     },
 
-    // -- Puts the search-input in state.searchText -----
     updateSearchText(state, payload) {
       state.searchText = payload;
       console.log("searchText is:" + this.state.searchText);
@@ -49,11 +44,13 @@ export default createStore({
       console.log("ARTIST: ", this.state.artist);
     },
 
-    // ---- Album not needed --------------
-
     updateAlbum(state, payload) {
       state.album = payload;
       console.log("ALBUM: ", payload);
+    },
+
+    setBrowseId(state, payload) {
+      state.browseId = payload;
     },
 
     //----- SHARED SONG & ARTIST ------------------------
@@ -75,6 +72,10 @@ export default createStore({
     setSharedArtistResult(state, payload) {
       state.sharedArtistResult = payload;
     },
+
+    setThumbnails(state, payload) {
+      state.thumbNails = payload;
+    }
   },
 
   actions: {
@@ -103,8 +104,6 @@ export default createStore({
         });
     },
 
-    //==== Måste fullfölja fetchen med dispatch i Artist.vue ================
-
     async fetchArtist() {
       await axios
         .get(
@@ -116,6 +115,16 @@ export default createStore({
           console.log("Uppdaterar artist!");
         });
     },
+
+    async fetchBrowseId() {
+      await axios.get("https://yt-music-api.herokuapp.com/api/yt/artists/" + this.state.browseId)
+        .then((response) => {
+          this.commit("setBrowseId", response.data)
+          console.log("BROWSEID: ", response.data)
+        })
+    
+    },
+
 
     //--- MIGHT NOT NEED THIS -------------------
 
@@ -129,6 +138,13 @@ export default createStore({
           this.commit("updateAlbum", response.data);
           console.log("Hämtad Album: ", response.data);
         });
+    },
+
+    async fetchThumbnails() {
+      await axios.get("https://yt-music-api.herokuapp.com/api/yt/artists/" + this.state.searchText)
+      .then((response) => {
+        this.commit("setThumbnails", response.data.content.thumbnails)
+      })
     },
 
     //----- SHARED FETCHES ----------------------------------------
@@ -171,6 +187,16 @@ export default createStore({
     getSong(state) {
       console.log("GET SONG: ", state.sharedSong);
       return state.sharedSong;
+    },
+
+    getThumbnails(state) {
+      console.log("GET IMAGES: ", state.thumbNails);
+      return state.thumbNails;
+    },
+
+    getBrowseId(state) {
+      console.log("GET BROWSEID ", state.browseId);
+      return state.browseId
     },
   },
   modules: {},

@@ -1,8 +1,10 @@
 <template>
-  <div class="container">
-    <SearchBar />
-    <div class="result-container"></div>
-  </div>
+  <body>
+    <div class="container">
+      <SearchBar />
+      <div class="result-container"></div>
+    </div>
+  </body>
 </template>
 
 <script>
@@ -14,4 +16,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+body {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+</style>

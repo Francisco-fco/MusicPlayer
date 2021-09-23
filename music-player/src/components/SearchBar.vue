@@ -1,14 +1,11 @@
 <template>
   <div class="search-container">
-    <div id="isPlaying">
-      <h2>Now Playing: </h2>
-    </div>
 
     <!--  -->
     <input
       type="text"
       id="search"
-      placeholder="Search for songs/albums or artist!"
+      placeholder="Search..."
       v-on:keyup.enter="search(searchText)"
       v-model="searchText"
     />
@@ -21,6 +18,7 @@
       <!-- <Artist /> -->
       <div id="artist-loop" v-for="(artist, i) in fetchSearchList" :key="i">
         <Artist :artist="artist" :type="artist" />
+
       </div>
 
       <!-- <Album /> -->
@@ -42,6 +40,7 @@ export default {
       searchText: this.searchText,
       searchResult: this.searchResult,
       artistName: this.artistName,
+      thumbnails: [],
     };
   },
 
@@ -56,6 +55,10 @@ export default {
       console.log("I NEED TO SE THIS: ", this.$store.getters.getSearchResult);
       return this.$store.getters.getSearchResult;
     },
+
+    fetchThumbnails() {
+      return this.$store.getters.getThumbnails;
+    },
   },
 
   methods: {
@@ -63,6 +66,7 @@ export default {
       this.$store.commit("updateSearchText", this.searchText);
       this.$store.dispatch("fetchSearchedText");
       this.$store.dispatch("fetchArtist", this.searchText);
+      this.$store.dispatch("fetchThumbnails", this.searchText)
     },
     Share() {
       this.$store.commit("setSharedArtist", this.artistName);
@@ -72,26 +76,25 @@ export default {
 </script>
 
 <style>
-
 #song-loop {
   background-color: darkred;
   color: #ffffff;
-  margin: 2vw;  
-  
+  margin: 2vw;
+  border-radius: 2vw;
 }
 
 #artist-loop {
   background-color: rgba(0, 0, 0, 0.788);
   color: #ffffff;
-  margin: 2vw;  
-  
+  margin: 2vw;
+  border-radius: 2vw;
 }
 
 #album-loop {
   background-color: rgba(0, 0, 0, 0.788);
   color: #ffffff;
-  margin: 2vw;  
-  
+  margin: 2vw;
+  border-radius: 2vw;
 }
 
 input {
@@ -101,7 +104,7 @@ input {
 }
 
 .searchResult > div {
-  margin:2vw;
+  margin: 2vw;
   font-size: 18;
 }
 </style>

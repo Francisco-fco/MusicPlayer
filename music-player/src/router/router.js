@@ -24,7 +24,7 @@ const routes = [
     component: ShareSong,
   },
   {
-    path: "/share/artist",
+    path: "/share/artist/:browseId",
     name: "Share-Artist",
     component: ShareArtist,
 

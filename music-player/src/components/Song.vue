@@ -1,12 +1,12 @@
 <template>
   <div class="song-card">
     <div class="cancion" v-if="song.type == 'song'">
-      <h2>Type: {{ song.type }}</h2>
-      <h4>Name: {{ song.name }}</h4>
-      <h4>Image: {{ song.thumbnails }}</h4>
-      <h4>Artist: {{ song.artist.name }}</h4>
-      <h4>Album: {{ song.album.name }}</h4>
-      <h4>Id: {{ song.videoId }}</h4>
+      <h1>Song:</h1>
+      <h3>Name: {{ song.name }}</h3>
+      <h3>Artist: {{ song.artist.name }}</h3>
+      <h3>Album: {{ song.album.name }}</h3>
+      <h3>Id: {{ song.videoId }}</h3>
+      <img v-bind:src="song.thumbnails[0].url">
       <button @click="Play(song.videoId)">Play</button>
       <button @click="Pause(song.videoId)">Pause</button>
       <button @click="Share()">Share</button>
@@ -42,24 +42,22 @@ export default {
     Share() {
       this.$store.commit("setSharedSong", this.song);
       this.$store.dispatch("fetchSharedSong");
-
-  // Implementera med routeUrl (KOLLA RADIOAPP)
-      this.$router.push({ path: "/share/song" });
+      this.$router.push({ path: "/share/song"});
     },
   },
 };
 </script>
 
 <style>
-h2 {
+h1 {
   padding: 1.2vw;
 }
 
-h4 {
+h3 {
   margin: 0.5vw;
 }
 
-.cancion {
-  margin-bottom: 2vh;
+.cancion > button {
+  margin-bottom: 5vh;
 }
 </style>
