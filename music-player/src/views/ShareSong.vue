@@ -1,21 +1,8 @@
 <template>
   <!-- <Share /> -->
   <div class="share-container">
-    <div id="song-loop">
-      <Song v-for="(song, i) in getSong" :key="i" :song="song" :type="'song'" />
-
-      <div id="show-data">
-        <h2>Song:</h2>
-        <h4>Name: {{ this.$store.getters.getSong.name }}</h4>
-        <img v-bind:src="this.$store.getters.getSong.thumbnails[0].url">
-        <h4>Artist: {{ this.$store.getters.getSong.artist.name }}</h4>
-        <h4>Album: {{ this.$store.getters.getSong.album.name }}</h4>
-        <h4>Id: {{ this.$store.getters.getSong.videoId }}</h4>
-        <button @click="Play(this.$store.getters.getSong.videoId)">Play</button>
-        <button @click="Pause(this.$store.getters.getSong.videoId)">
-          Pause
-        </button>
-      </div>
+    <div v-for="(song, i) in getSong" :key="i" id="song-loop">
+      <Song  :song="song" :type="song" />
     </div>
   </div>
 </template>
@@ -25,11 +12,7 @@ import Song from "../components/Song.vue";
 
 export default {
   data() {
-    return {
-      artistName: {},
-      songName: {},
-      albumName: {},
-    };
+    return {};
   },
 
   components: {
@@ -50,9 +33,15 @@ export default {
   },
 
   computed: {
-    getSong() {
+    getSharedSong() {
+      this.$store.dispatch("fetchSong");
+
+      // undefined
+      console.log("Need to see this: " + this.$store.getters.getSharedSong);
       return this.$store.getters.getSong;
     },
+
+
   },
 };
 </script>

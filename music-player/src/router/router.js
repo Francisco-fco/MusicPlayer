@@ -19,7 +19,7 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
-    path: "/share/song",
+    path: "/share/song/:song",
     name: "Share-Song",
     component: ShareSong,
   },

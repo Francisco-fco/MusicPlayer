@@ -9,8 +9,8 @@
       <img v-bind:src="song.thumbnails[1].url">
       <button @click="Play(song.videoId)">Play</button>
       <button @click="Pause(song.videoId)">Pause</button>
-      <button @click="Share()">Share
-       <!-- <router-link to="thisURL">Share</router-link> -->
+      <button @click="Share()">
+        <router-link :to="'/share/song/' + song.name">Share</router-link>
       </button>
     </div>
   </div>
@@ -24,25 +24,7 @@ export default {
   props: ["song"],
 
   computed: {
-    getSong() {
-      console.log("Need to see this: ", this.$store.getters.getSong);
-      return this.$store.getters.getSong;
-    },
-
-  //   thisURL() {
-  //    let url = encodeURIComponent(this.song.thumbnails[1].url);
-  //    return {
-  //     "/share/" : 
-  //     this.song.name + 
-  //     "/" + 
-  //     this.song.artist + 
-  //     "/" + 
-  //     this.song.videoId + 
-  //     "/" + 
-  //     url + 
-  //     "/song"
-  //    };
-  //  },
+  
   },
 
   methods: {
@@ -56,10 +38,11 @@ export default {
     Pause(pause) {
       window.player.pauseVideo(pause);
     },
+
     Share() {
-      this.$store.commit("setSharedSong", this.song);
-      this.$store.dispatch("fetchSharedSong");
-      this.$router.push({ path: "/share/song" });
+      this.$store.commit("updateSong", this.song);
+      this.$store.dispatch("fetchSong");
+    //  this.$router.push({ path: "/share/song" });
     },
   },
 };

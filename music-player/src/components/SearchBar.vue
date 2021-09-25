@@ -22,9 +22,9 @@
       </div>
 
       <!-- <Album /> -->
-      <div id="album-loop" v-for="(album, i) in fetchSearchList" :key="i">
+      <!-- <div id="album-loop" v-for="(album, i) in fetchSearchList" :key="i">
         <Album :album="album" :type="album" />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -32,32 +32,25 @@
 <script>
 import Artist from "./Artist.vue";
 import Song from "./Song.vue";
-import Album from "./Album.vue";
+// import Album from "./Album.vue";
 
 export default {
   data() {
     return {
       searchText: this.searchText,
-      searchResult: this.searchResult,
-      artistName: this.artistName,
-      thumbnails: [],
     };
   },
 
   components: {
     Song,
     Artist,
-    Album,
+  //  Album,
   },
 
   computed: {
     fetchSearchList() {
       console.log("I NEED TO SE THIS: ", this.$store.getters.getSearchResult);
       return this.$store.getters.getSearchResult;
-    },
-
-    fetchThumbnails() {
-      return this.$store.getters.getThumbnails;
     },
   },
 
@@ -66,7 +59,6 @@ export default {
       this.$store.commit("updateSearchText", this.searchText);
       this.$store.dispatch("fetchSearchedText");
       this.$store.dispatch("fetchArtist", this.searchText);
-      this.$store.dispatch("fetchThumbnails", this.searchText)
     },
     Share() {
       this.$store.commit("setSharedArtist", this.artistName);
