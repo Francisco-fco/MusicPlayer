@@ -60,9 +60,6 @@ export default {
       this.$store.dispatch("fetchSearchedText");
       this.$store.dispatch("fetchArtist", this.searchText);
     },
-    Share() {
-      this.$store.commit("setSharedArtist", this.artistName);
-    },
   },
 };
 </script>

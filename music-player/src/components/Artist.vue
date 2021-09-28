@@ -6,8 +6,9 @@
       <h3>Browse ID: {{ artist.browseId }}</h3>
       <img v-bind:src="artist.thumbnails[1].url">
 
-      
-        <router-link :to="'/share/artist/' + artist.browseId">Share</router-link>
+      <button @click="Share()">
+        <router-link :to="'/share/' + artist.browseId">Share</router-link>
+      </button>  
       
     </div>
   </div>
@@ -23,8 +24,8 @@ export default {
 
   computed: {
     getArtistName() {
-      console.log("Need to see this: " + this.$store.getters.getArtistResult);
-      return this.$store.getters.getArtistResult;
+      console.log("Need to see this: " + this.$store.getters.getArtist);
+      return this.$store.getters.getArtist;
     },
 
     getBrowseId() {

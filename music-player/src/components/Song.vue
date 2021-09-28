@@ -6,11 +6,11 @@
       <h3>Artist: {{ song.artist.name }}</h3>
       <h3>Album: {{ song.album.name }}</h3>
       <h3>Id: {{ song.videoId }}</h3>
-      <img v-bind:src="song.thumbnails[1].url">
+      <img v-bind:src="song.thumbnails[1].url" />
       <button @click="Play(song.videoId)">Play</button>
       <button @click="Pause(song.videoId)">Pause</button>
       <button @click="Share()">
-        <router-link :to="'/share/song/' + song.name">Share</router-link>
+        <router-link :to="'/share/' + song.videoId">Share</router-link>
       </button>
     </div>
   </div>
@@ -19,12 +19,12 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+    }
   },
   props: ["song"],
 
   computed: {
-  
   },
 
   methods: {
@@ -40,9 +40,9 @@ export default {
     },
 
     Share() {
-      this.$store.commit("updateSong", this.song);
-      this.$store.dispatch("fetchSong");
-    //  this.$router.push({ path: "/share/song" });
+     this.$store.commit("updateSong", this.song.videoId);
+     this.$store.dispatch("fetchSong")
+      //  this.$router.push({ path: "/share/song" });
     },
   },
 };

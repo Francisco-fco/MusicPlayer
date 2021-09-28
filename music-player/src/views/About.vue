@@ -2,6 +2,7 @@
   <div class="about">
     <h1>This is an about page</h1>
   </div>
+  </template>
   <!--
   <div class="player-container">
     <header>
@@ -116,6 +117,123 @@
     this.player.src = this.current.src;
     //this.player.play()
   },
-  */
+
+
+ ------ SHARESONG --------------------------------------------------------------
+
+
+  <template>
+  
+  <div class="share-container">
+    SOMETHING WRONG WHIT in getSongResutl 
+    <div v-for="(song, i) in fetchSearchList" :key="i" id="song-loop">
+      <Song :song="song" :type="song" />
+    </div>
+
+    <div class="song" v-if="$route.params.type == 'song'">
+      <div v-if="getSong.song == $route.params.song"></div>
+
+      <h1>Song:</h1>
+      <h3>Name: {{ getSearchResult.song.name }}</h3>
+      <h3>Artist: {{ song.artist.name }}</h3>
+      <h3>Album: {{ song.album.name }}</h3>
+      <h3>Id: {{ song.videoId }}</h3>
+      <img v-bind:src="song.thumbnails[1].url" />
+      <button @click="Play(song.videoId)">Play</button>
+      <button @click="Pause(song.videoId)">Pause</button>
+
+    </div>
+  </div>
+  </template>
+-->
+
+
+
+import Song from "../components/Song.vue";
+
+export default {
+  data() {
+    return {
+    };
+  },
+
+  components: {
+    Song,
+  },
+
+  methods: {
+    Play(play) {
+      // calling global variable
+      window.player.loadVideoById(play);
+      window.player.playVideo();
+      console.log("playing videoId");
+    },
+
+    Pause(pause) {
+      window.player.pauseVideo(pause);
+    },
+  },
+
+  computed: {   
+    fetchSearchList() {
+      console.log("I NEED TO SE THIS: ", this.$store.getters.getSearchResult);
+      return this.$store.getters.getSearchResult;
+      
+    }, 
+    // getSharedSong() {
+    //   // undefined
+    //   console.log("Need to see this: " + this.$store.getters.getSong);
+    //   return this.$store.getters.getSong;
+    // },
+  },
+};
+*/
+
+
+
+
+
+
+<!---- SHAREARTIST ---------------------------------------------------------------
+<template>
+
+  <div class="player-container">
+    
+    <div id="artist-loop">
+      <Artist
+        v-for="(artist, i) in getArtist"
+        :key="i"
+        :artist="artist"
+        :type="'artist'"
+      />
+      <div id="show-data">
+        <h2>Artist:</h2>
+        <h4>Name: {{ this.$store.getters.getArtist.name }}</h4>
+        <h4>Browse ID: {{ this.$store.getters.getArtist.browseId }}</h4>
+        <img v-bind:src="this.$store.getters.getArtist.thumbnails[1].url">
+      </div> 
+    </div>
+  </div>
+  </template>
   -->
-</template>
+
+
+
+// import Artist from "../components/Artist.vue";
+// export default {
+//   data() {
+//     return {};
+//   },
+
+//   components: {
+//     Artist,
+//   },
+
+//   computed: {
+//     getSharedArtist() {
+//       console.log("Need to see this: " + this.getters.getSharedArtist.name);
+//       return this.$store.getters.getSharedArtist.name;
+//     },
+//   },
+// };
+
