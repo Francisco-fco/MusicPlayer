@@ -5,7 +5,6 @@
       <Artist v-for="(artist, i) in getArtist"
         :key="i"
         :artist="artist"
-        :type="'artist'"
       />
       <div id="show-data">
         <h2>Artist:</h2>

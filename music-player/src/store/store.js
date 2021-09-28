@@ -14,6 +14,7 @@ export default createStore({
     updatedSong: [],
     updatedArtist: {},
     thumbNails: [],
+    thumbNailsResult: [],
     sharedSong: {},
     sharedSongResult: {},
     sharedArtist: {},
@@ -35,7 +36,7 @@ export default createStore({
 
     updateSong(state, payload) {
       state.song = payload;
-      console.log("SET SONG: ", payload);
+      console.log("SET SONG/videoID: ", payload);
     },
 
     setUpdatedSong(state, payload) {
@@ -80,6 +81,14 @@ export default createStore({
 
     setThumbnails(state, payload) {
       state.thumbNails = payload;
+    },
+
+    setThumbnailsResult(state, payload) {
+      state.thumbNailsResult = payload;
+    },
+
+    setVideoId(state, payload) {
+      state.videoId = payload;
     }
   },
 
@@ -147,9 +156,9 @@ export default createStore({
     },
 
     async fetchThumbnails() {
-      await axios.get("https://yt-music-api.herokuapp.com/api/yt/artists/" + this.state.searchText)
+      await axios.get("https://yt-music-api.herokuapp.com/api/yt/artists/" + this.state.thumbNails)
       .then((response) => {
-        this.commit("setThumbnails", response.data.content.thumbnails)
+        this.commit("setThumbnailsResult", response.data.content.thumbnails)
       })
     },
 

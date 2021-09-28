@@ -41,7 +41,9 @@ export default {
 
     Share() {
      this.$store.commit("updateSong", this.song.videoId);
-     this.$store.dispatch("fetchSong")
+    // this.$store.commit("setThumbnails", this.song.thumbnails[1]);
+     this.$store.dispatch("fetchSong");
+    // this.$store.dispatch("fetchThumbnails");
       //  this.$router.push({ path: "/share/song" });
     },
   },

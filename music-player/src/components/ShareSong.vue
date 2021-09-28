@@ -3,6 +3,7 @@
   <div class="share-container">
     <div id="song-loop">
       <Song v-for="(song, i) in getSong" :key="i" :song="song" />
+    </div>
 
       <div id="show-data">
         <h2>Song:</h2>
@@ -16,7 +17,6 @@
           Pause
         </button>
       </div>
-    </div>
   </div>
 </template>
 
@@ -42,6 +42,12 @@ export default {
       window.player.pauseVideo(pause);
     },
   },
+
+  mounted() {
+      this.$store.commit("updateSong", this.$route.params.song);
+      this.$store.dispatch("fetchSong");
+  },
+
   computed: {
     getSong() {
       return this.$store.getters.getSong;
