@@ -9,7 +9,7 @@
       <img v-bind:src="song.thumbnails[1].url" />
       <button @click="Play(song.videoId)">Play</button>
       <button @click="Pause(song.videoId)">Pause</button>
-      <button @click="Share()">
+      <button>
         <router-link :to="'/share/' + song.videoId">Share</router-link>
       </button>
     </div>
@@ -22,7 +22,7 @@ export default {
     return {
     }
   },
-  props: ["song"],
+  props: ["song", "videoId"],
 
   computed: {
   },
@@ -38,15 +38,9 @@ export default {
     Pause(pause) {
       window.player.pauseVideo(pause);
     },
-
-    Share() {
-     this.$store.commit("updateSong", this.song.videoId);
-    // this.$store.commit("setThumbnails", this.song.thumbnails[1]);
-     this.$store.dispatch("fetchSong");
-    // this.$store.dispatch("fetchThumbnails");
-      //  this.$router.push({ path: "/share/song" });
-    },
   },
+  
+  
 };
 </script>
 

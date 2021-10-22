@@ -50,6 +50,7 @@ export default {
 
   computed: {
     getSong() {
+      console.log("ShareSong GETTER: ", this.$store.getters.getSong);
       return this.$store.getters.getSong;
     },
   },

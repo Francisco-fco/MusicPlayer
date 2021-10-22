@@ -24,12 +24,22 @@ export default {
       
     };
   },
+
+  props: [ "browseId" ],
+
   components: {
     Artist,
   },
+
+   mounted() {
+      this.$store.commit("updateArtist", this.$route.params.browseId);
+      this.$store.dispatch("fetchArtist");
+
+   },
+
   computed: {
     getArtist() {
-      console.log("Need to see this: " + this.$store.getters.getArtist.name);
+      console.log("Need to see this: " + this.$store.getters.getArtist);
       return this.$store.getters.getArtist;
     },
   },

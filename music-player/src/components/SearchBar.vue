@@ -15,8 +15,18 @@
         <Song :song="song" :type="song" />
       </div>
 
-      <!-- <Artist /> -->
+      <div id="song-loop" v-for="(song, i) in fetchAllSongs" :key="i">
+        <Song :song="song" :type="song" />
+      </div>
+
+
       <div id="artist-loop" v-for="(artist, i) in fetchSearchList" :key="i">
+        <Artist :artist="artist" :type="artist" />
+
+      </div>
+
+      <!-- <Artist /> -->
+      <div id="artist-loop" v-for="(artist, i) in fetchAllArtists" :key="i">
         <Artist :artist="artist" :type="artist" />
 
       </div>
@@ -49,16 +59,30 @@ export default {
 
   computed: {
     fetchSearchList() {
-      console.log("I NEED TO SE THIS: ", this.$store.getters.getSearchResult);
       return this.$store.getters.getSearchResult;
     },
+
+    fetchAllSongs() {
+      console.log("THIS IS allSongsResultList: ", this.$store.getters.getAllSongs);
+      return this.$store.getters.getAllSongs;
+    },
+
+    fetchAllArtists() {
+      console.log("THIS IS allArtistsResultList: ", this.$store.getters.getAllArtists);
+      return this.$store.getters.getAllArtists;
+    }
   },
 
   methods: {
     search() {
+      console.log("THIS IS searchText: ", this.searchText);
+
       this.$store.commit("updateSearchText", this.searchText);
       this.$store.dispatch("fetchSearchedText");
-      this.$store.dispatch("fetchArtist", this.searchText);
+      this.$store.dispatch("fetchAllSongs", this.searchText);
+      this.$store.dispatch("fetchAllArtists", this.searchText);
+
+      
     },
   },
 };

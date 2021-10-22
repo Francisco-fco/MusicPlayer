@@ -5,38 +5,47 @@ export default createStore({
   state: {
     searchText: "",
     searchResult: [],
+    allSongs: [],
+    allArtists: [],
     
-    videoId: "",
-    
+
+
+
     artist: "",
-    album: {},
+    updatedArtist: "",
     song: "",
-    updatedSong: [],
-    updatedArtist: {},
+    updatedSong: "",
     thumbNails: [],
     thumbNailsResult: [],
-    sharedSong: {},
-    sharedSongResult: {},
-    sharedArtist: {},
-    sharedArtistResult: [],
-    browseId: {},
+    browseId: "",
+    videoId: "",
   },
 
   mutations: {
 
     setSearchResult(state, payload) {
-      console.log("SETTER CONTEXT", payload);
       state.searchResult.content = payload;
     },
 
     updateSearchText(state, payload) {
       state.searchText = payload;
-      console.log("searchText is:" + this.state.searchText);
     },
+
+    updateAllSongs(state, payload) {
+      state.allSongs = payload;
+      console.log("UPPDATERA alla låtar: ", payload);
+    },
+
+    updateAllArtists(state, payload) {
+      state.allArtists = payload;
+      console.log("UPPDATERA alla artister: ", payload);
+    },
+
+
+
 
     updateSong(state, payload) {
       state.song = payload;
-      console.log("SET SONG/videoID: ", payload);
     },
 
     setUpdatedSong(state, payload) {
@@ -45,38 +54,20 @@ export default createStore({
 
     updateArtist(state, payload) {
       state.artist = payload;
-      console.log("ARTIST: ", this.state.artist);
+      console.log("update artiiiiiist: ", payload);
+    },
+
+    setUpdatedArtist(state, payload) {
+      state.updatedArtist = payload;
+      console.log("UPDATED ARTIST", payload);
     },
 
     updateAlbum(state, payload) {
       state.album = payload;
-      console.log("ALBUM: ", payload);
     },
 
     setBrowseId(state, payload) {
       state.browseId = payload;
-    },
-
-    //----- SHARED SONG & ARTIST ------------------------
-
-    // setSharedSong = undefined
-
-    setSharedSong(state, payload) {
-      state.sharedSong = payload;
-      console.log("SHARED SONG: ", payload);
-    },
-
-    setSharedSongResult(state, payload) {
-      state.sharedSongResult = payload;
-    },
-
-    setSharedArtist(state, payload) {
-      state.sharedArtist = payload;
-      console.log("Artist Name Is Set!", payload);
-    },
-
-    setSharedArtistResult(state, payload) {
-      state.sharedArtistResult = payload;
     },
 
     setThumbnails(state, payload) {
@@ -96,8 +87,7 @@ export default createStore({
     async fetchSearchedText() {
       await axios
         .get(
-          "https://yt-music-api.herokuapp.com/api/yt/search/" +
-            this.state.searchText
+          "https://yt-music-api.herokuapp.com/api/yt/search/" + this.state.searchText
         )
         .then((response) => {
           console.log("FETCH-DATA: ", response.data.content);
@@ -106,30 +96,43 @@ export default createStore({
         });
     },
 
-    async fetchSong() {
+    async fetchAllSongs() {
       await axios
-        .get(
-          "https://yt-music-api.herokuapp.com/api/yt/songs/" +
-            this.state.song
-        )
-        .then((response) => {
-          console.log("Hämtad låt: ", response.data.content[0]);
-          this.commit("setUpdatedSong", response.data.content[0]);
+      .get("https://yt-music-api.herokuapp.com/api/yt/songs/" + this.state.searchText)
+      .then((response) => {
+        console.log("ALL SONGS!!! ", response.data.content);
+      this.commit("updateAllSongs", response.data.content);
 
-        });
+      });
     },
 
-    async fetchArtist() {
+    async fetchAllArtists() {
       await axios
-        .get(
-          "https://yt-music-api.herokuapp.com/api/yt/artists/" +
-            this.state.searchText
-        )
-        .then((response) => {
-          this.commit("updateArtist", response.data);
-          console.log("Uppdaterar artist!");
-        });
+      .get("https://yt-music-api.herokuapp.com/api/yt/artists/" + this.state.searchText)
+      .then((response) => {
+        console.log("ALL ARTISTS!!! ", response.data.content);
+      this.commit("updateAllArtists", response.data.content);
+
+      });
+    },    
+
+     async fetchSong() {
+       await axios
+         .get("https://yt-music-api.herokuapp.com/api/yt/songs/" + this.state.song)
+         .then((response) => {
+           this.commit("setUpdatedSong", response.data.content[0]);
+
+      });
     },
+
+        async fetchArtist() {
+          await axios
+          .get("https://yt-music-api.herokuapp.com/api/yt/artists/" + this.state.artist)
+          .then((response) => {
+            console.log("Uppdaterar artist!", response.data.content[0]);
+            this.commit("setUpdatedArtist", response.data.content[0]);
+          });
+        },
 
     async fetchBrowseId() {
       await axios.get("https://yt-music-api.herokuapp.com/api/yt/artists/" + this.state.browseId)
@@ -139,60 +142,28 @@ export default createStore({
         })
     
     },
-
-
-    //--- MIGHT NOT NEED THIS -------------------
-
-    async fetchAlbum() {
-      await axios
-        .get(
-          "https://yt-music-api.herokuapp.com/api/yt/search/" +
-            this.state.searchText
-        )
-        .then((response) => {
-          this.commit("updateAlbum", response.data);
-          console.log("Hämtad Album: ", response.data);
-        });
-    },
-
-    async fetchThumbnails() {
-      await axios.get("https://yt-music-api.herokuapp.com/api/yt/artists/" + this.state.thumbNails)
-      .then((response) => {
-        this.commit("setThumbnailsResult", response.data.content.thumbnails)
-      })
-    },
-
-    //----- SHARED FETCHES ----------------------------------------
-
-     async fetchSharedArtist() {
-       await axios
-        .get("https://yt-music-api.herokuapp.com/api/yt/artists/" + this.state.sharedArtist)
-         .then((response) => {
-           this.commit("setSharedArtistResult", response.data);
-            console.log("Hämtad artist: ", response.data.content[0]);
-      });
-    },
-
-
-     async fetchSharedSong() {
-      await axios
-        .get("https://yt-music-api.herokuapp.com/api/yt/songs/" + this.state.sharedSong)
-        .then((response) => {
-          this.commit("setSharedSongResult", response.data);
-           console.log("Hämtad låt: ", response.data.content[0]);
-    });
-    },
   },
 
   getters: {
     getSearchResult(state) {
+      console.log("got searchResult: ", state.searchResult.content);
       return state.searchResult.content;
     },
 
-    getSharedArtist(state) {
-      console.log("GET ARTISTNAME", state.sharedArtistResult);
-      return state.sharedArtistResult;
+    getAllSongs(state) {
+      console.log("GOT ALL SONGS: ", state.allSongs);
+      return state.allSongs;
     },
+
+    getAllArtists(state) {
+      console.log("GOT ALL ARTISTS: ", state.allArtists);
+      return state.allArtists;
+    },
+
+
+
+
+
 
     getSong(state) {
       console.log("GET UPDATED-SONG: ", state.updatedSong);
@@ -201,13 +172,8 @@ export default createStore({
 
     // Does not work
     getArtist(state) {
-      console.log("GET ARTISTNAME", state.sharedArtistResult);
-      return state.sharedArtistResult;
-    },
-
-    getThumbnails(state) {
-      console.log("GET IMAGES: ", state.thumbNails);
-      return state.thumbNails;
+      console.log("GET ARTISTNAME", state.updatedArtist);
+      return state.updatedArtist;
     },
 
     getBrowseId(state) {
