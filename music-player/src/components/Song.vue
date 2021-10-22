@@ -10,7 +10,12 @@
       <button @click="Play(song.videoId)">Play</button>
       <button @click="Pause(song.videoId)">Pause</button>
       <button>
-        <router-link :to="'/share/' + song.videoId">Share</router-link>
+        <router-link
+          :to="
+            routerSongLink
+          "
+          >Share</router-link
+        >
       </button>
     </div>
   </div>
@@ -20,11 +25,26 @@
 export default {
   data() {
     return {
-    }
+    };
   },
-  props: ["song", "videoId"],
+  props: ["song"],
 
   computed: {
+    routerSongLink() {
+      let thumbNail = encodeURIComponent(this.song.thumbnails[1]);
+      return(
+      '/share/' +
+            this.song.name +
+            '/' +
+            thumbNail +
+            '/' +
+            this.song.artist.name +
+            '/' +
+            this.song.album.name +
+            '/' +
+            this.song.videoId
+            )
+    } 
   },
 
   methods: {
@@ -39,8 +59,6 @@ export default {
       window.player.pauseVideo(pause);
     },
   },
-  
-  
 };
 </script>
 

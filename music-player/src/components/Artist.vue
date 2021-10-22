@@ -4,12 +4,11 @@
       <h1>Artist:</h1>
       <h3>Name: {{ artist.name }}</h3>
       <h3>Browse ID: {{ artist.browseId }}</h3>
-      <img v-bind:src="artist.thumbnails[1].url">
+      <img v-bind:src="artist.thumbnails[1].url" />
 
       <button>
-        <router-link :to="'/share/' + artist.browseId">Share</router-link>
-      </button>  
-      
+        <router-link :to="routerArtistLink">Share</router-link>
+      </button>
     </div>
   </div>
 </template>
@@ -19,16 +18,24 @@ export default {
   data() {
     return {};
   },
-  
-  props: ["artist", "browseId"],
 
-  methods: {
+  props: ["artist"],
 
-  },
+  methods: {},
 
   computed: {
-    
-  }
+    routerArtistLink() {
+      let thumbNail = encodeURIComponent(this.artist.thumbnails[1]);
+      return (
+        "/share/" +
+        this.artist.name +
+        "/" +
+        thumbNail +
+        "/" +
+        this.artist.browseId
+      );
+    },
+  },
 };
 </script>
 

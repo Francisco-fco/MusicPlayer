@@ -25,14 +25,13 @@ export default {
     };
   },
 
-  props: [ "browseId" ],
-
   components: {
     Artist,
   },
 
-   mounted() {
+   created() {
       this.$store.commit("updateArtist", this.$route.params.browseId);
+      console.log("Created in SHARE browseId: ", this.$route.params.browseId);
       this.$store.dispatch("fetchArtist");
 
    },

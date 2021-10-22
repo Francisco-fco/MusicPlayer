@@ -11,19 +11,19 @@
     />
     <!-- <Song /> -->
     <div class="share-container">
-      <div id="song-loop" v-for="(song, i) in fetchSearchList" :key="i">
+      <!-- <div id="song-loop" v-for="(song, i) in fetchSearchList" :key="i">
         <Song :song="song" :type="song" />
-      </div>
+      </div> -->
 
       <div id="song-loop" v-for="(song, i) in fetchAllSongs" :key="i">
         <Song :song="song" :type="song" />
       </div>
 
 
-      <div id="artist-loop" v-for="(artist, i) in fetchSearchList" :key="i">
+      <!-- <div id="artist-loop" v-for="(artist, i) in fetchSearchList" :key="i">
         <Artist :artist="artist" :type="artist" />
 
-      </div>
+      </div> -->
 
       <!-- <Artist /> -->
       <div id="artist-loop" v-for="(artist, i) in fetchAllArtists" :key="i">
@@ -59,6 +59,7 @@ export default {
 
   computed: {
     fetchSearchList() {
+      console.log("THIS IS searchTextResult: ", this.$store.getters.getSearchResult);
       return this.$store.getters.getSearchResult;
     },
 

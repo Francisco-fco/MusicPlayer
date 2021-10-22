@@ -43,8 +43,9 @@ export default {
     },
   },
 
-  mounted() {
-      this.$store.commit("updateSong", this.$route.params.song);
+  created() {
+      this.$store.commit("updateSong", this.$route.params.videoId);
+      console.log("Created in SHARE videoId: ", this.$route.params.videoId);
       this.$store.dispatch("fetchSong");
   },
 

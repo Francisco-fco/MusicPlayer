@@ -46,6 +46,7 @@ export default createStore({
 
     updateSong(state, payload) {
       state.song = payload;
+      console.log("IS THIS THE shared-song?: ", payload);
     },
 
     setUpdatedSong(state, payload) {
@@ -129,7 +130,7 @@ export default createStore({
           await axios
           .get("https://yt-music-api.herokuapp.com/api/yt/artists/" + this.state.artist)
           .then((response) => {
-            console.log("Uppdaterar artist!", response.data.content[0]);
+            console.log("Uppdaterar artist!", response.data.content);
             this.commit("setUpdatedArtist", response.data.content[0]);
           });
         },
