@@ -47,7 +47,7 @@ export default {
 
 <style>
 #show-data {
-  color: #ffffff;
+  color: #ffffff62;
   padding: 2vw;
   border-radius: 2vw;
 }

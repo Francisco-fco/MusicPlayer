@@ -4,19 +4,16 @@ import axios from "axios";
 export default createStore({
   state: {
     searchText: "",
+    playingNow: "",
     searchResult: [],
     allSongs: [],
     allArtists: [],
-    
-
-
-
+    playList: [],
+    index: 0,
     artist: "",
     updatedArtist: "",
     song: "",
     updatedSong: "",
-    thumbNails: [],
-    thumbNailsResult: [],
     browseId: "",
     videoId: "",
   },
@@ -27,26 +24,25 @@ export default createStore({
       state.searchResult.content = payload;
     },
 
+    setPlayList(state,payload){
+      state.playList.push(payload)
+      console.log('inserted playList', state.playList)
+    },
+
     updateSearchText(state, payload) {
       state.searchText = payload;
     },
 
     updateAllSongs(state, payload) {
       state.allSongs = payload;
-      console.log("UPPDATERA alla låtar: ", payload);
     },
 
     updateAllArtists(state, payload) {
       state.allArtists = payload;
-      console.log("UPPDATERA alla artister: ", payload);
     },
-
-
-
 
     updateSong(state, payload) {
       state.song = payload;
-      console.log("IS THIS THE shared-song?: ", payload);
     },
 
     setUpdatedSong(state, payload) {
@@ -55,32 +51,23 @@ export default createStore({
 
     updateArtist(state, payload) {
       state.artist = payload;
-      console.log("update artiiiiiist: ", payload);
     },
 
     setUpdatedArtist(state, payload) {
       state.updatedArtist = payload;
-      console.log("UPDATED ARTIST", payload);
-    },
-
-    updateAlbum(state, payload) {
-      state.album = payload;
     },
 
     setBrowseId(state, payload) {
       state.browseId = payload;
     },
 
-    setThumbnails(state, payload) {
-      state.thumbNails = payload;
-    },
-
-    setThumbnailsResult(state, payload) {
-      state.thumbNailsResult = payload;
-    },
-
     setVideoId(state, payload) {
       state.videoId = payload;
+    }, 
+
+    setPlayingNow(state, payload) {
+      state.playingNow = payload;
+      console.log('SET playing now', payload)
     }
   },
 
@@ -93,7 +80,6 @@ export default createStore({
         .then((response) => {
           console.log("FETCH-DATA: ", response.data.content);
           this.commit("setSearchResult", response.data.content);
-          console.log("ALL INFO", response.data.content);
         });
     },
 
@@ -115,7 +101,15 @@ export default createStore({
       this.commit("updateAllArtists", response.data.content);
 
       });
-    },    
+    }, 
+    
+    async fetchPlayList() {
+      await axios 
+      .get("https://yt-music-api.herokuapp.com/api/yt/songs/" + this.state.searchText)
+      .then((response) => {
+        this.commit("setPlayList", response.data.content);
+      })
+    },
 
      async fetchSong() {
        await axios
@@ -130,7 +124,6 @@ export default createStore({
           await axios
           .get("https://yt-music-api.herokuapp.com/api/yt/artists/" + this.state.artist)
           .then((response) => {
-            console.log("Uppdaterar artist!", response.data.content);
             this.commit("setUpdatedArtist", response.data.content[0]);
           });
         },
@@ -161,11 +154,24 @@ export default createStore({
       return state.allArtists;
     },
 
+    getPlayList(state) {
+      console.log("GET NOW PLAYING: ", state.playList);
+      return state.playList; 
+    },
 
+    getVideoId(state) {
+      console.log('GET VIDEOID: ', state.videoId);
+      return state.videoId;
+    },
 
+    getPlayingNow(state) {
+      return state.playingNow;
+    },
 
-
-
+    //  getIndex() {
+    //   return state.index;
+    //  },
+    
     getSong(state) {
       console.log("GET UPDATED-SONG: ", state.updatedSong);
       return state.updatedSong;

@@ -6,17 +6,19 @@
       <h3>Artist: {{ song.artist.name }}</h3>
       <h3>Album: {{ song.album.name }}</h3>
       <h3>Id: {{ song.videoId }}</h3>
-      <img v-bind:src="song.thumbnails[1].url" />
-      <button @click="Play(song.videoId)">Play</button>
-      <button @click="Pause(song.videoId)">Pause</button>
-      <button>
-        <router-link
-          :to="
-            routerSongLink
-          "
-          >Share</router-link
-        >
-      </button>
+      <div id="thumbnail">
+        <img v-bind:src="song.thumbnails[1].url" />
+      </div>
+        <button @click="Play(song.videoId)">Play</button>
+        <button @click="Pause(song.videoId)">Stop</button>
+        <button class="share">
+          <router-link id="route"
+            :to="
+              routerSongLink
+            "
+            >Share</router-link
+          >
+        </button>
     </div>
   </div>
 </template>
@@ -58,6 +60,10 @@ export default {
     Pause(pause) {
       window.player.pauseVideo(pause);
     },
+
+    loadPlayList(array) {
+      window.loadPlaylist(array)
+    }
   },
 };
 </script>
@@ -72,11 +78,10 @@ export default {
   position: relative;
 }
 
-.cancion > img {
+#thumbnail {
   position: absolute;
-  right: 75vw;
   bottom: 15vh;
-  border-radius: 1vw;
+  left: 3vw;
 }
 
 .cancion > button {
@@ -84,5 +89,21 @@ export default {
   margin-bottom: 5vh;
   margin-left: 1.5vw;
   margin-right: 1.5vw;
+}
+
+button {
+  background-color: black;
+  color: white;
+  margin-left: 1vw;
+  padding: 0.3vw;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.share > #route{
+  text-decoration: none;
+  color: white;
 }
 </style>
