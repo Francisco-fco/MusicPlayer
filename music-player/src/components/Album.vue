@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="album-card">
     <div class="album" v-if="type == 'album'">
       <h2>Type: {{ album.type }}</h2>
@@ -9,9 +9,9 @@
     </div>
   </div>
 </template>
-
+-->
 <script>
-export default {
+/*export default {
   props: ["album"],
 
   computed: {
@@ -26,7 +26,7 @@ export default {
       },
     }
   },
-};
+};*/
 </script>
 
 <style></style>

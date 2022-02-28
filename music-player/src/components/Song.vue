@@ -6,10 +6,19 @@
       <h3>Artist: {{ song.artist.name }}</h3>
       <h3>Album: {{ song.album.name }}</h3>
       <h3>Id: {{ song.videoId }}</h3>
-      <img v-bind:src="song.thumbnails[1].url">
-      <button @click="Play(song.videoId)">Play</button>
-      <button @click="Pause(song.videoId)">Pause</button>
-      <button @click="Share()">Share</button>
+      <div id="thumbnail">
+        <img v-bind:src="song.thumbnails[1].url" />
+      </div>
+        <button @click="Play(song.videoId)">Play</button>
+        <button @click="Pause(song.videoId)">Stop</button>
+        <button class="share">
+          <router-link id="route"
+            :to="
+              routerSongLink
+            "
+            >Share</router-link
+          >
+        </button>
     </div>
   </div>
 </template>
@@ -17,15 +26,27 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+    };
   },
   props: ["song"],
 
   computed: {
-    getSong() {
-      console.log("Need to see this: ", this.$store.getters.getSong);
-      return this.$store.getters.getSong;
-    },
+    routerSongLink() {
+      let thumbNail = encodeURIComponent(this.song.thumbnails[1]);
+      return(
+      '/share/' +
+            this.song.name +
+            '/' +
+            thumbNail +
+            '/' +
+            this.song.artist.name +
+            '/' +
+            this.song.album.name +
+            '/' +
+            this.song.videoId
+            )
+    } 
   },
 
   methods: {
@@ -39,11 +60,10 @@ export default {
     Pause(pause) {
       window.player.pauseVideo(pause);
     },
-    Share() {
-      this.$store.commit("setSharedSong", this.song);
-      this.$store.dispatch("fetchSharedSong");
-      this.$router.push({ path: "/share/song"});
-    },
+
+    loadPlayList(array) {
+      window.loadPlaylist(array)
+    }
   },
 };
 </script>
@@ -57,21 +77,36 @@ export default {
   position: relative;
 }
 
-img {
-  width: 10vw;
-  height: 15vh;
+.cancion {
+  position: relative;
 }
 
-.cancion > img {
+#thumbnail {
   position: absolute;
-  right: 78vw;
-  bottom: 12vh;
-  border-radius: 1vw;
+  bottom: 15vh;
+  left: 3vw;
 }
+
 .cancion > button {
   margin-top: 2vh;
   margin-bottom: 5vh;
   margin-left: 1.5vw;
   margin-right: 1.5vw;
+}
+
+button {
+  background-color: black;
+  color: white;
+  margin-left: 1vw;
+  padding: 0.3vw;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.share > #route{
+  text-decoration: none;
+  color: white;
 }
 </style>

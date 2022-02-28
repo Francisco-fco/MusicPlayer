@@ -4,9 +4,11 @@
       <h1>Artist:</h1>
       <h3>Name: {{ artist.name }}</h3>
       <h3>Browse ID: {{ artist.browseId }}</h3>
-      <img v-bind:src="artist.thumbnails[1].url">
+      <img v-bind:src="artist.thumbnails[1].url" />
 
-      <button @click="Share()">Share</button>
+      <button>
+        <router-link :to="routerArtistLink">Share</router-link>
+      </button>
     </div>
   </div>
 </template>
@@ -14,31 +16,24 @@
 <script>
 export default {
   data() {
-    return {
-      thumbnails: this.thumbnails,
-      browseId: this.browseId,
-      thisId: '',
-    };
+    return {};
   },
+
   props: ["artist"],
 
+  methods: {},
+
   computed: {
-    getArtistName() {
-      console.log("Need to see this: " + this.$store.getters.getArtist);
-      return this.$store.getters.getArtist;
-    },
-
-    getBrowseId() {
-      let browseId = this.$store.getters.getBrowseId;
-
-      return browseId;
-    },
-  },
-  methods: {
-    Share() {
-      this.$store.commit("setSharedArtist", this.artist)
-      this.$store.dispatch("fetchSharedArtist")
-      this.$router.push({ path: "/share/artist/" + this.browseId});
+    routerArtistLink() {
+      let thumbNail = encodeURIComponent(this.artist.thumbnails[1]);
+      return (
+        "/share/" +
+        this.artist.name +
+        "/" +
+        thumbNail +
+        "/" +
+        this.artist.browseId
+      );
     },
   },
 };
@@ -59,6 +54,16 @@ export default {
   border-radius: 1vw;
 }
 
+.artista {
+  position: relative;
+}
+
+.artista > img {
+  position: absolute;
+  right: 75vw;
+  bottom: 3.5vh;
+  border-radius: 1vw;
+}
 .artista > button {
   margin-bottom: 5vh;
 }

@@ -1,8 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
-import ShareSong from "../views/ShareSong";
-import ShareArtist from "../views/ShareArtist";
-
+import ShareSong from "../components/ShareSong";
+import ShareArtist from "../components/ShareArtist";
 const routes = [
   {
     path: "/",
@@ -19,13 +18,14 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
-    path: "/share/song",
-    name: "Share-Song",
+    path: "/share/:songName/:thumbnails/:artistName/:albumName/:videoId",
+    name: "ShareSong",
     component: ShareSong,
   },
   {
-    path: "/share/artist/:browseId",
-    name: "Share-Artist",
+//  path: "/share/:song/:artist/:videoId/:url/:song",
+    path: "/share/:artistName/:thumbnails/:browseId",
+    name: "ShareArtist",
     component: ShareArtist,
 
   },
