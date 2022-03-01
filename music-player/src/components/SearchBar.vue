@@ -15,6 +15,12 @@
       <button id="playlist" @click="getPlayList()">Playlist</button>
     </div>
 
+    <div class="playing-now">
+      Now playing:
+      <h4>{{ fetchPlayingNow.artist.name }}</h4>
+      <h4>{{ fetchPlayingNow.name }}</h4>
+    </div>
+
     <!-- <Song /> -->
     <div class="share-container">
       <div id="song-loop" v-for="(song, i) in fetchAllSongs" :key="i">
@@ -73,6 +79,11 @@ export default {
     fetchPlayList() {
       return this.$store.getters.getPlayList;
     },
+
+    fetchPlayingNow() {
+      console.log("WHAT IS diiizzz????: ", this.$store.getters.getPlayingNow);
+      return this.$store.getters.getPlayingNow;
+    },
   },
 
   methods: {
@@ -87,9 +98,8 @@ export default {
     },
 
     play() {
-      console.log('WE ARE HERE')
-      const play =
-        this.$store.getters.getAllSongs[0];
+      console.log("WE ARE HERE");
+      const play = this.$store.getters.getAllSongs[0];
       if (play) {
         window.player.loadVideoById(play);
         window.player.playVideo(play);
