@@ -17,7 +17,7 @@
 
     <div class="playing-now">
       Now playing:
-      <h4>{{ fetchPlayingNow.artist.name }}</h4>
+      <h4>{{ fetchPlayingNow.artist }}</h4>
       <h4>{{ fetchPlayingNow.name }}</h4>
     </div>
 
@@ -213,6 +213,10 @@ input {
   margin-left: 45%;
   margin-right: 45%;
   border-radius: 15px;
+}
+
+.playing-now {
+  background-color: rgba(169, 169, 169, 0.849);
 }
 
 #play {
