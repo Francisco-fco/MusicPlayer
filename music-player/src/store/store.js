@@ -155,7 +155,7 @@ export default createStore({
     },
 
     getPlayList(state) {
-      console.log("GET NOW PLAYING: ", state.playList);
+      console.log( state.playList);
       return state.playList; 
     },
 
@@ -165,6 +165,7 @@ export default createStore({
     },
 
     getPlayingNow(state) {
+      console.log("GET NOW PLAYING: ", state.playingNow);
       return state.playingNow;
     },
 

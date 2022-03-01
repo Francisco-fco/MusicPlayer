@@ -1,5 +1,8 @@
 <template>
   <div class="search-container">
+    <div class="playingNow">
+       
+      </div>
 
     <!--  -->
     <input
@@ -49,9 +52,6 @@
 import Artist from "./Artist.vue";
 import Song from "./Song.vue";
 
-
-// import Album from "./Album.vue";
-
 export default {
   data() {
     return {
@@ -85,10 +85,6 @@ export default {
       return this.$store.getters.getPlayList;
         },
 
-    fetchNowPlaying() {
-      console.log('Playing now in player! ', this.$store.getters.getPlayingNow);
-      return this.$store.getters.getPlayingNow;
-        },
   },
 
   methods: {
@@ -102,20 +98,35 @@ export default {
 
       
     },
-     play() {
-      window.player.loadVideoById();
-      window.player.playVideo();
+
+     play(play) {
+      console.log('CLICK');
+      this.$store.commit('setPlayingNow');
+
+      window.player.loadVideoById(play);
+      window.player.playVideo(play);
     },
+
+    getPlayList() {
+      const play = this.$store.getters.getAllSongs[
+        this.$store.getters.getAllSongs.findIndex((song) => song === this.$store.state.playingNow)
+      ]
+      if (play) {
+        window.player.loadVideoById(play);
+        window.player.playVideo(play)
+        this.$store.commit('setPlayingNow', play)
+        console.log('PLAYING NOW: ', play);
+      } else {
+        return null;
+      }
+
+
+    },
+
     pause() {
       window.player.pauseVideo();
     },
    
-    // playlist(array) {
-    //   this.$store.commit("setPlayList", array);
-    //   console.log('WHAT IS THIS: ', array);
-    //   window.player.loadVideoById(array);
-    //   this.$store.commit("setPlayingNow", array);
-    // },
     previous() {
       const prev = this.$store.getters.getAllSongs[
         this.$store.getters.getAllSongs.findIndex((song) => song === this.$store.state.playingNow) - 1
@@ -164,6 +175,10 @@ export default {
   border-radius: 2vw;
 }
 
+.playingNow {
+  border: solid black;
+}
+
 #album-loop {
   background-color: rgba(0, 0, 0, 0.788);
   color: #ffffff;
@@ -182,13 +197,18 @@ input {
   font-size: 18;
 }
 
+.search-container {
+  border: solid black;
+  background-color: darkred;
+}
+
 .buttons {
   display: flex;
   justify-content: center;
   background-color: darkred;
   padding: 1vw;
-  margin-left: 39.3%;
-  margin-right: 39.3%;
+  margin-left: 45%;
+  margin-right: 45%;
   border-radius: 15px;
 
 }
