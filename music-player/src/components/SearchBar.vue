@@ -213,9 +213,9 @@ input {
 .playing-now {
   margin-left: 35vw;
   margin-right: 35vw;
-  padding-bottom: 1vh;
   padding-top: 1vh;
-  background-color: darkred;
+  padding-bottom: 2vh;
+  background-color: rgba(0, 0, 0, 0.788);
 }
 
 .playing-now > h3 {

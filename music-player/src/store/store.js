@@ -168,20 +168,10 @@ export default createStore({
       console.log("GET NOW PLAYING: ", state.playingNow);
       return state.playingNow;
     },
-
-    //  getIndex() {
-    //   return state.index;
-    //  },
     
     getSong(state) {
       console.log("GET UPDATED-SONG: ", state.updatedSong);
       return state.updatedSong;
-    },
-
-    // Does not work
-    getArtist(state) {
-      console.log("GET ARTISTNAME", state.updatedArtist);
-      return state.updatedArtist;
     },
 
     getBrowseId(state) {
