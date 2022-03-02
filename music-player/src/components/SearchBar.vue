@@ -10,13 +10,13 @@
     <div class="buttons">
       <button id="previous" @click="previous()">PREV</button>
       <button id="play" @click="play()">▶</button>
-      <button id="pause" @click="pause()">PAUSE</button>
+      <button id="pause" @click="pause()">STOP</button>
       <button id="next" @click="next()">NEXT</button>
       <button id="playlist" @click="getPlayList()">Playlist</button>
     </div>
 
-    <div class="playing-now">
-      Now playing:
+    <div v-if="isClicked" class="playing-now">
+      <h2>Now playing:</h2>
       <h4>{{ fetchPlayingNow.artist }}</h4>
       <h4>{{ fetchPlayingNow.name }}</h4>
     </div>
@@ -37,11 +37,13 @@
 
 <script>
 import Artist from "./Artist.vue";
-import Song from "./Song.vue";
+import Song from "./Song.vue"; 
 
 export default {
+
   data() {
     return {
+      isClicked: false,
       searchText: this.searchText,
     };
   },
@@ -98,7 +100,8 @@ export default {
     },
 
     play() {
-      console.log("WE ARE HERE");
+      console.log("CLICK");
+      this.isClicked = !this.isClicked;
       const play = this.$store.getters.getAllSongs[0];
       if (play) {
         window.player.loadVideoById(play);
@@ -128,6 +131,7 @@ export default {
     },
 
     pause() {
+      this.isClicked = false;
       window.player.pauseVideo();
     },
 
@@ -202,13 +206,12 @@ input {
 }
 
 .search-container {
-  background-color: darkred;
+  background-color: rgba(0, 0, 0, 0.74);
 }
 
 .buttons {
   display: flex;
   justify-content: center;
-  background-color: darkred;
   padding: 1vw;
   margin-left: 45%;
   margin-right: 45%;
@@ -216,7 +219,11 @@ input {
 }
 
 .playing-now {
-  background-color: rgba(169, 169, 169, 0.849);
+  margin-left: 35vw;
+  margin-right: 35vw;
+  padding-bottom: 1vh;
+  padding-top: 1vh;
+  background-color: darkred;
 }
 
 #play {

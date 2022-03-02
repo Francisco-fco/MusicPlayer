@@ -81,6 +81,14 @@ export default {
   position: relative;
 }
 
+.cancion > h3 {
+  color: black;
+}
+
+.cancion > h1 {
+  color: black;
+}
+
 #thumbnail {
   position: absolute;
   bottom: 15vh;
