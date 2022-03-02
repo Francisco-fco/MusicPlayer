@@ -82,11 +82,11 @@ export default {
 }
 
 .cancion > h3 {
-  color: black;
+  color: rgb(226, 213, 213);
 }
 
 .cancion > h1 {
-  color: black;
+  color: rgb(226, 213, 213);
 }
 
 #thumbnail {

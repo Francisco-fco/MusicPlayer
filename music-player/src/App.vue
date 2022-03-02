@@ -48,9 +48,9 @@ export default {
 
 .beats {
   position: absolute;
-  bottom: 2.4vh;
-  left: 1vw;
-  width: 10%;
+  bottom: 0.9vh;
+  left: 1.5vw;
+  width: 12%;
   border-radius: 15px;
 }
 </style>

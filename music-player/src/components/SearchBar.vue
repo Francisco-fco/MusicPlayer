@@ -90,7 +90,7 @@ export default {
 
     play() {
       console.log("CLICK");
-      this.isClicked = !this.isClicked;
+      this.isClicked = true;
       const play = this.$store.getters.getAllSongs[0];
       if (play) {
         window.player.loadVideoById(play);
@@ -195,10 +195,13 @@ input {
 }
 
 .search-container {
-  background-color: rgba(0, 0, 0, 0.74);
+  padding-top: 2vh;
+  padding-bottom: 1vh;
+  background-color: rgba(0, 0, 0, 0.068);
 }
 
 .buttons {
+  color: black;
   display: flex;
   justify-content: center;
   padding: 1vw;
