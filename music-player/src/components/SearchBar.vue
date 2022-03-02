@@ -17,8 +17,8 @@
 
     <div v-if="isClicked" class="playing-now">
       <h2>Now playing:</h2>
-      <h4>{{ fetchPlayingNow.artist }}</h4>
-      <h4>{{ fetchPlayingNow.name }}</h4>
+      <h3>{{ fetchArtistName.name }}</h3>
+      <h3>{{ fetchPlayingNow.name }}</h3>
     </div>
 
     <!-- <Song /> -->
@@ -26,17 +26,11 @@
       <div id="song-loop" v-for="(song, i) in fetchAllSongs" :key="i">
         <Song :song="song" :type="song" />
       </div>
-
-      <!-- <Artist /> -->
-      <div id="artist-loop" v-for="(artist, i) in fetchAllArtists" :key="i">
-        <Artist :artist="artist" :type="artist" />
-      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Artist from "./Artist.vue";
 import Song from "./Song.vue"; 
 
 export default {
@@ -50,7 +44,6 @@ export default {
 
   components: {
     Song,
-    Artist,
   },
 
   computed: {
@@ -70,22 +63,18 @@ export default {
       return this.$store.getters.getAllSongs;
     },
 
-    fetchAllArtists() {
-      console.log(
-        "THIS IS allArtistsResultList: ",
-        this.$store.getters.getAllArtists
-      );
-      return this.$store.getters.getAllArtists;
-    },
-
     fetchPlayList() {
       return this.$store.getters.getPlayList;
     },
 
     fetchPlayingNow() {
-      console.log("WHAT IS diiizzz????: ", this.$store.getters.getPlayingNow);
+      console.log("ARTIST NAME: ", this.$store.getters.getPlayingNow.artist.name);
       return this.$store.getters.getPlayingNow;
     },
+
+    fetchArtistName() {
+      return this.$store.getters.getPlayingNow.artist;
+    }
   },
 
   methods: {
@@ -224,6 +213,10 @@ input {
   padding-bottom: 1vh;
   padding-top: 1vh;
   background-color: darkred;
+}
+
+.playing-now > h3 {
+  color: white;
 }
 
 #play {
