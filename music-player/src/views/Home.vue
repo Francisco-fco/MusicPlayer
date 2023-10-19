@@ -24,7 +24,6 @@ export default {
   },
   methods: {
     searchVideos(searchText) {
-      // Call your Vuex action to fetch search results
       this.$store.dispatch("fetchSearchedText", searchText).then((videos) => {
         this.videos = videos;
       });
@@ -34,6 +33,7 @@ export default {
       const videoId = this.videos[index].id.videoId;
       console.log('PLAY THIS: ', videoId)
       this.$store.commit("setPlayingVideo", videoId);
+      window.player.playVideo(videoId)
     },
   },
   computed: {
