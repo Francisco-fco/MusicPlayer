@@ -1,11 +1,14 @@
 <template>
   <div>
-    <div v-for="(video, index) in videos" :key="video.id.videoId">
+    <div v-for="(video) in videos" :key="video.id.videoId">
       <img v-bind:src="video.snippet.thumbnails.medium.url">
       <h3>{{ video.snippet.title }}</h3>
       <span class="button">
-        <button @click="play(index)">Play</button>
+        <button @click="play(video.id.videoId)">Play</button>
       </span>
+      <div v-if="selectedVideoId">
+        <iframe :src="'https://www.youtube.com/embed/' + video.id.videoId" frameborder="0"></iframe>
+      </div>
     </div>
   </div>
 </template>
@@ -15,8 +18,14 @@ export default {
   props: {
     videos: Array,
   },
+  data() {
+    return {
+      selectedVideoId: null,
+    };
+  },
   methods: {
     play(index) {
+      this.selectedVideoId = index;
       this.$emit("play", index);
     },
   },
