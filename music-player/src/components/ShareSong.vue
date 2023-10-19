@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import Song from "./Song.vue";
+import Song from "./VideoList.vue";
 export default {
   data() {
     return {

@@ -8,11 +8,8 @@
   <div>
     <img class="beats" src="./assets/beatsbyFCO.png" alt="">
   </div>
-    
-
 </div>
   <router-view />
-  
 </template>
 
 <script>

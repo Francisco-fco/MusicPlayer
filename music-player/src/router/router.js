@@ -1,7 +1,8 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
-import ShareSong from "../components/ShareSong";
-import ShareArtist from "../components/ShareArtist";
+import ShareSong from "../components/ShareSong.vue";
+import ShareArtist from "../components/ShareArtist.vue";
+
 const routes = [
   {
     path: "/",
@@ -9,25 +10,20 @@ const routes = [
     component: Home,
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  },
-  {
-    path: "/share/:songName/:thumbnails/:artistName/:albumName/:videoId",
+    path: "/share/song/:videoId",
     name: "ShareSong",
     component: ShareSong,
+    props: (route) => ({
+      videoId: route.params.videoId,
+    }),
   },
   {
-//  path: "/share/:song/:artist/:videoId/:url/:song",
-    path: "/share/:artistName/:thumbnails/:browseId",
+    path: "/share/artist/:channelId",
     name: "ShareArtist",
     component: ShareArtist,
-
+    props: (route) => ({
+      channelId: route.params.channelId,
+    }),
   },
 ];
 

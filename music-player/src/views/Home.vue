@@ -1,16 +1,46 @@
 <template>
-  <body>
-    <div class="container">
-      <SearchBar />
+  <div class="container">
+    <SearchBar @search="searchVideos" />
+    <div v-if="videos.length">
+      <VideoList :videos="videos" @play="playVideo" />
     </div>
-  </body>
+  </div>
 </template>
 
 <script>
 import SearchBar from "../components/SearchBar.vue";
+import VideoList from "../components/VideoList.vue";
+
 export default {
   components: {
     SearchBar,
+    VideoList,
+  },
+  data() {
+    return {
+      videos: [],
+      currentVideoIndex: null,
+    };
+  },
+  methods: {
+    searchVideos(searchText) {
+      // Call your Vuex action to fetch search results
+      this.$store.dispatch("fetchSearchedText", searchText).then((videos) => {
+        this.videos = videos;
+      });
+    },
+    playVideo(index) {
+      this.currentVideoIndex = index;
+      const videoId = this.videos[index].id.videoId;
+      console.log('PLAY THIS: ', videoId)
+      this.$store.commit("setPlayingVideo", videoId);
+    },
+  },
+  computed: {
+    playingVideoId() {
+      console.log('IN HOME: ', this.$store.getters.getPlayingVideoId)
+      return this.$store.getters.getPlayingVideoId;
+    },
   },
 };
 </script>
