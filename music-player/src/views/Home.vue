@@ -30,6 +30,7 @@ export default {
     },
     playVideo(index) {
       this.currentVideoIndex = index;
+      console.log('VIDEOS IN HOME: ', this.videos)
       const videoId = this.videos[index].id.videoId;
       console.log('PLAY THIS: ', videoId)
       this.$store.commit("setPlayingVideo", videoId);
