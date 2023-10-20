@@ -84,7 +84,7 @@ export default createStore({
             part: "snippet",
             type: "video",
             maxResults: 10,
-            key: "AIzaSyCUFawIa23c3w4WHBSdgr8YzGqC0QUvfc4",
+            key: "",
           },
         });
         const searchResult = response.data.items;
@@ -105,7 +105,7 @@ export default createStore({
             part: "snippet",
             type: "video",
             maxResults: 10,
-            key: "AIzaSyCUFawIa23c3w4WHBSdgr8YzGqC0QUvfc4",
+            key: "",
           },
         });
         const searchResult = response.data.items;
@@ -123,7 +123,7 @@ export default createStore({
             part: "snippet",
             type: "video",
             maxResults: 10,
-            key: "AIzaSyCUFawIa23c3w4WHBSdgr8YzGqC0QUvfc4",
+            key: "",
           },
         });
         const searchResult = response.data;
