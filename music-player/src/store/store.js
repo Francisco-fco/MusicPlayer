@@ -5,7 +5,7 @@ export default createStore({
   state: {
     searchText: "",
     searchResults: [],
-    playingVideoId: null,    
+    playingVideoId: null,
     playingNow: "",
     searchResult: [],
     allSongs: [],
@@ -21,9 +21,8 @@ export default createStore({
   },
 
   mutations: {
-
     setSearchResult(state, payload) {
-      console.log("in mutation: ", payload)
+      console.log("in mutation: ", payload);
       state.searchResult = payload;
     },
 
@@ -31,9 +30,9 @@ export default createStore({
       state.playingVideoId = videoId;
     },
 
-    setPlayList(state,payload){
-      state.playList.push(payload)
-      console.log('inserted playList', state.playList)
+    setPlayList(state, payload) {
+      state.playList.push(payload);
+      console.log("inserted playList", state.playList);
     },
 
     updateSearchText(state, payload) {
@@ -66,98 +65,114 @@ export default createStore({
 
     setVideoId(state, payload) {
       state.videoId = payload;
-    }, 
+    },
 
     setPlayingNow(state, payload) {
       state.playingNow = payload;
-      console.log('SET playing now', payload)
-    }
+      console.log("SET playing now", payload);
+    },
   },
 
   actions: {
     async fetchSearchedText({ commit }, searchText) {
-      console.log("fetchSearchedText in store: ", searchText)
+      console.log("fetchSearchedText in store: ", searchText);
       try {
-        const response = await axios.get("https://www.googleapis.com/youtube/v3/search", {
-          params: {
-            q: searchText,
-            part: "snippet",
-            type: "video",
-            maxResults: 10,
-            key: "",
-          },
-        });
+        const response = await axios.get(
+          "https://www.googleapis.com/youtube/v3/search",
+          {
+            params: {
+              q: searchText,
+              part: "snippet",
+              type: "video",
+              maxResults: 10,
+              key: "",
+            },
+          }
+        );
         const searchResult = response.data.items;
-        console.log('SearchResult IN STORE: ', searchResult)
+        console.log("SearchResult IN STORE: ", searchResult);
         commit("setSearchResult", searchResult);
         return Promise.resolve(searchResult);
       } catch (error) {
         console.error("Error fetching searched text:", error);
-        return Promise.reject(error); 
+        return Promise.reject(error);
       }
     },
 
     async fetchAllSongs({ commit, state }) {
       try {
-        const response = await axios.get("https://www.googleapis.com/youtube/v3/search", {
-          params: {
-            q: state.searchText,
-            part: "snippet",
-            type: "video",
-            maxResults: 10,
-            key: "",
-          },
-        });
+        const response = await axios.get(
+          "https://www.googleapis.com/youtube/v3/search",
+          {
+            params: {
+              q: state.searchText,
+              part: "snippet",
+              type: "video",
+              maxResults: 10,
+              key: "",
+            },
+          }
+        );
         const searchResult = response.data.items;
         commit("updateAllSongs", searchResult);
       } catch (error) {
         console.error("Error fetching all songs:", error);
       }
     },
-    
+
     async fetchPlayList({ commit }) {
       try {
-        const response = await axios.get("https://www.googleapis.com/youtube/v3/search", {
-          params: {
-            q: this.state.searchText,
-            part: "snippet",
-            type: "video",
-            maxResults: 10,
-            key: "",
-          },
-        });
+        const response = await axios.get(
+          "https://www.googleapis.com/youtube/v3/search",
+          {
+            params: {
+              q: this.state.searchText,
+              part: "snippet",
+              type: "video",
+              maxResults: 10,
+              key: "",
+            },
+          }
+        );
         const searchResult = response.data;
-        console.log('SearchResult: ', searchResult)
+        console.log("SearchResult: ", searchResult);
         commit("setPlayList", searchResult);
       } catch (error) {
         console.error("Error fetching searched text:", error);
       }
     },
 
-     async fetchSong() {
-       await axios
-         .get("https://yt-music-api.herokuapp.com/api/yt/songs/" + this.state.song)
-         .then((response) => {
-           this.commit("setUpdatedSong", response.data.content[0]);
-
-      });
+    async fetchSong() {
+      await axios
+        .get(
+          "https://yt-music-api.herokuapp.com/api/yt/songs/" + this.state.song
+        )
+        .then((response) => {
+          this.commit("setUpdatedSong", response.data.content[0]);
+        });
     },
 
-        async fetchArtist() {
-          await axios
-          .get("https://yt-music-api.herokuapp.com/api/yt/artists/" + this.state.artist)
-          .then((response) => {
-            this.commit("setUpdatedArtist", response.data.content[0]);
-          });
-        },
+    async fetchArtist() {
+      await axios
+        .get(
+          "https://yt-music-api.herokuapp.com/api/yt/artists/" +
+            this.state.artist
+        )
+        .then((response) => {
+          this.commit("setUpdatedArtist", response.data.content[0]);
+        });
+    },
 
     async fetchBrowseId() {
-      await axios.get("https://yt-music-api.herokuapp.com/api/yt/artists/" + this.state.browseId)
+      await axios
+        .get(
+          "https://yt-music-api.herokuapp.com/api/yt/artists/" +
+            this.state.browseId
+        )
         .then((response) => {
-          this.commit("setBrowseId", response.data)
-          console.log("BROWSEID: ", response.data)
-        })
-    
+          this.commit("setBrowseId", response.data);
+          console.log("BROWSEID: ", response.data);
+        });
     },
   },
 
@@ -178,11 +193,11 @@ export default createStore({
 
     getPlayList(state) {
       console.log("getter in store: ", state.playList);
-      return state.playList; 
+      return state.playList;
     },
 
     getVideoId(state) {
-      console.log('GET VIDEOID: ', state.videoId);
+      console.log("GET VIDEOID: ", state.videoId);
       return state.videoId;
     },
 
@@ -190,7 +205,7 @@ export default createStore({
       console.log("GET NOW PLAYING: ", state.playingNow);
       return state.playingNow;
     },
-    
+
     getSong(state) {
       console.log("GET UPDATED-SONG: ", state.updatedSong);
       return state.updatedSong;
@@ -198,7 +213,7 @@ export default createStore({
 
     getBrowseId(state) {
       console.log("GET Browse ID ", state.browseId);
-      return state.browseId
+      return state.browseId;
     },
   },
   modules: {},
